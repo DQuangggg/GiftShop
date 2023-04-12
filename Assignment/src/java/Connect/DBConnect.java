@@ -14,7 +14,7 @@ import java.util.logging.Logger;
  *
  * @author ADMIN
  */
-public abstract class DBConnect<T> {
+public abstract class DBConnect {
 
     /**
      *
