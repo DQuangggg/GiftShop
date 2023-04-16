@@ -16,21 +16,61 @@
         <servlet-name>updateAccountController</servlet-name>
         <servlet-class>Controller.Account.updateAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>cartController</servlet-name>
+        <servlet-class>Controller.Cart.cartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>checkOutController</servlet-name>
+        <servlet-class>Controller.Cart.checkOutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteCartController</servlet-name>
+        <servlet-class>Controller.Cart.deleteCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>showCartController</servlet-name>
+        <servlet-class>Controller.Cart.showCartController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateCartController</servlet-name>
+        <servlet-class>Controller.Cart.updateCartController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addAccountController</servlet-name>
-        <url-pattern>/addAccountController</url-pattern>
+        <url-pattern>/addAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>deleteAccountController</servlet-name>
-        <url-pattern>/deleteAccountController</url-pattern>
+        <url-pattern>/deleteAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>managerAccountController</servlet-name>
-        <url-pattern>/managerAccountController</url-pattern>
+        <url-pattern>/managerAccount</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>updateAccountController</servlet-name>
-        <url-pattern>/updateAccountController</url-pattern>
+        <url-pattern>/updateAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>cartController</servlet-name>
+        <url-pattern>/cartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>checkOutController</servlet-name>
+        <url-pattern>/checkOutController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteCartController</servlet-name>
+        <url-pattern>/deleteCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>showCartController</servlet-name>
+        <url-pattern>/showCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateCartController</servlet-name>
+        <url-pattern>/updateCartController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

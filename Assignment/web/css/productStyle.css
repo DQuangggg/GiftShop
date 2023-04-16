@@ -1,0 +1,97 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+.col-sm-7 .product_name {
+    margin: -2px 0 0;
+
+    font: 29px Roboto;
+    color: #000;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+ #quantity {
+    width: 50px;
+    height: 37px;
+    display: inline-block;
+    margin: 0 10px;
+    padding: 0 10px;
+    text-align: center;
+}
+
+#product_price {
+    margin: 15px 0;
+}
+
+.money_single {
+    margin: 5px 7px 0 0;
+    font: 700 16px Roboto;
+    color: red;
+}
+.container{
+    margin-top: -20px;
+}
+
+ #product_description h4 {
+    margin: 15px 0;
+    padding: 0 0 5px;
+    font-family: Roboto;
+    border-bottom: 1px solid #000000;
+    font-weight: 700;
+    font-size: 26px;
+    color: #000;
+
+}
+#product_description p {
+    color: #888;
+font: 20px Roboto;
+    margin-top: 25px;
+}
+
+#add_cartProduct{
+    text-decoration: underline;
+    background-color: #1a1a1a;
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+    border: none;
+}
+.product_type a {
+    color: #000;
+    text-decoration: none;
+}
+
+#purchase label{
+    color: #888;
+}
+#product_price label{
+        color: black;
+
+}
+.column_center h3 {
+    margin: 150px 0 50px 0;
+    padding: 0 0 10px;
+    font-family: Roboto;
+    border-bottom: 1px solid #000000;
+    font-weight: 700;
+    font-size: 26px;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.title_p{
+    font-size: 30px; 
+    background: #f1f1f1;
+     padding: 10px; 
+    margin: 15px 0;
+    font-family: Roboto;
+    border-bottom: 1px solid #000000;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+}
+.product_details{
+    margin-top: 10px;
+}
+

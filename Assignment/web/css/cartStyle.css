@@ -1,0 +1,146 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+
+.cart_buttons a {
+	color: #000;
+	text-decoration: none;
+}
+
+
+.product_name {
+	font: 14px Roboto;
+	color: #000;
+	text-transform: uppercase;
+}
+
+
+
+#payment-methods ul li {
+	float: left;
+	padding: 0 7px 0 0;
+}
+
+.cart_buttons {
+	margin: 30px 0;
+}
+label {
+	font-weight: 700;
+	font-size: 13px;
+}
+
+
+
+
+
+.column_center h1, .column_center h3{
+	margin: 15px 0;
+	padding: 0 0 5px;
+	font-family: Roboto;
+	border-bottom: 1px solid #000000;
+	font-weight: 700;
+	font-size: 26px;
+	color: #000;
+	border-bottom: 1px solid;
+
+	text-transform: uppercase;
+}
+.column_center h2, .column_center h3, .column_center h4 {
+	font-size: 15px;
+}
+.cart_subtotal h3 {
+	margin: 0;
+	padding: 15px 0;
+	border-bottom: 1px solid #dddddd;
+}
+.cart_subtotal h3 .money {
+	float: right;
+
+    margin-right: 10px;
+
+}
+.cart-list > .row {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border-bottom: 1px solid #e1e1e1;
+}
+
+
+.pull-right {
+	float: right;
+}
+.cart-list .item_remove {
+	margin: 0 0 0 10px;
+}
+.cart-list .product_name {
+	margin-top: 15px;
+}
+.cart-list .row .item_vendor {
+	border-bottom: 1px solid #dddddd;
+	color: #888;
+}
+.cart-list .item_price {
+	padding: 10px 0 0;
+}
+
+.cart-list .item_price .total {
+	text-align: right;
+}
+.cart-list .item_price .total h3 {
+	border-bottom: 1px solid #dddddd;
+            margin-right: -20px;
+}
+
+
+.cart-list .item_price .input-small {
+	width: 60px ;
+	height: 37px;
+	display: inline-block;
+	padding: 5px;
+	text-align: center;
+}
+.cart-list .item_price .price {
+	line-height: 37px;
+}
+
+
+
+.cart-list .item_image a img {
+	max-width: 100%;
+}
+
+
+
+
+.btn-default {
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+    padding-top: 8px;
+    margin-top: 3px;
+}
+
+.item_image{
+    border: 1px solid;
+}
+.header_row-2-search {
+    width: 100%;
+}
+.cart-list .item_image {
+    display: block;
+    padding: 15px;
+    background: #f1f1f1;
+}
+.product_name a, .product_name a:hover{
+    color: #000;
+}
+.column .widget .widget_header {
+    margin: 0;
+
+}
+
+.column .product {
+    margin: 40px 0 0;
+} 
+

@@ -1,0 +1,68 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+.table thead{
+    background-color: #db1d24;
+}
+
+.table tr td img{
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+.table tr td b {
+    color: white;
+}
+
+
+.table{
+    text-align: center;
+}
+
+thead{
+    border:2px solid black;
+}
+thead td{
+    border:2px solid black;
+}
+
+.manager_bannerSet .manager_left {
+    padding: 20px;
+    background-color: #ffffff;
+    margin-bottom: 15px;
+    border-radius: 25px;
+}
+.manager_bannerSet .manager_left a{
+    float: right;
+    background-color: black;
+    color: white;
+    padding: 5px;
+    margin-bottom: 20px;
+    text-decoration: none;
+    margin-top: -20px;
+}
+
+.manager_bannerSet .manager_left b{
+    text-transform: uppercase;
+    font-size: 25px;
+}
+
+.manager_bannerSet .manager_left h1{
+    text-transform: uppercase;
+    font-size: 50px;
+}
+
+.header_row-2-search {
+    padding-top: 60px;
+    width: 100%;
+}
+#bt_delete img{
+    margin-top: 50px;
+}
+#bt_update img{
+    margin-top: 0px;
+}
+.button_searchbyid{
+    padding: 2px 2px 0px 2px;
+}

@@ -1,0 +1,53 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+.column .widget .widget_header {
+    margin: 0;
+    padding: 15px 20px;
+    background: #000000;
+    font: 700 16px/16px Roboto;
+    color: #fff;
+    text-transform: uppercase;
+        margin-top: 35px;
+
+}
+
+.column .product .product_name a {
+    display: block;
+    line-height: 15px;
+    color: #000;
+}
+
+.column .product .product_desc {
+    padding: 10px 0 0;
+    line-height: 19px;
+    font-size: 13px;
+    color: #888;
+}
+.column .product .product_price {
+    padding: 7px 0 0;
+    float: right;
+}
+
+.column .product .product_img a {
+    width: 110px;
+    display: block;
+    float: left;
+    padding: 10px;
+}
+
+.col-md-3 .product_name {
+    font: 14px Roboto;
+    color: #000;
+    text-transform: uppercase;
+}
+
+.column .product {
+    margin: 60px 0 0;
+}
+.money {
+    font: 700 16px Roboto;
+    color: #000;
+}
+

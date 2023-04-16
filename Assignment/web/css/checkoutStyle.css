@@ -1,0 +1,76 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+.field__input {
+    background-clip: padding-box;
+    border-radius: 5px;
+    border: 1px solid;
+
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    padding: 15px 13px;
+    word-break: normal;
+    line-height: inherit;
+    margin-top: 15px;
+    border-color: #d9d9d9;
+
+}
+
+.bt_send{
+    margin-top: 20px;
+    padding-top: 0px;
+    background: #db1d24;
+    color: white;
+    border-radius: 5px;
+    border-color: #d9d9d9;
+    width: 80px;
+    font: 600 15px/47px Roboto;
+    text-transform: uppercase;
+    height: 45px;
+    border: none;
+
+}
+
+.column .widget .widget_header{
+    margin: 0px;
+}
+
+#checkout_shipping_firstname{
+    float: left;
+    width: 40%;
+}
+#checkout_shipping_lastname{
+    float: right;
+    width: 57%;
+    margin-bottom: 15px;
+}
+
+
+.product_pricecheckout,.product_total{
+    margin-top: 4px;
+    font: 600 16px Roboto;
+}
+
+.column .product{
+    margin:0 0 30px 0;    
+}
+
+.payprice{
+    margin-top: 25px;
+}
+.column_center h1, .column_center h3 {
+    margin: 15px 0;
+    padding: 0 0 5px;
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: 26px;
+    color: #000;
+    border-bottom: 1px solid;
+    text-transform: uppercase;
+}
+.column_center h3 {
+    font-size: 15px;
+}
+

@@ -1,0 +1,87 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+.clearfix ul,
+li
+{    
+    margin: 0;
+    padding: 0;
+    font-weight: 400;
+}
+
+
+.clearfix ul {
+    list-style: none;
+}
+
+
+
+.sf-menu li {
+    position: relative;
+    float: left;
+
+}
+
+
+#navigation{
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 20px;
+    background-color: #1a1a1a;
+}
+
+.sf-menu>li>a {
+    height: 46px;
+    display: block;
+    padding: 0 20px;
+    border-right: 3px solid #ffffff;
+    font: 700 15px/47px Roboto;
+    color: #ffffff;
+    text-decoration: none;
+    text-transform: uppercase;
+
+
+}
+
+.sf-menu>li.active>a,
+.sf-menu>li:hover>a {
+    background: #db1d24;
+    color: white;
+}
+
+
+.sf-menu ul {
+    background: #000000;
+    position: absolute;
+    left: 0;
+    top: 46px;
+    z-index: 1000;
+
+}
+
+.sf-menu ul li a {
+    display: block;
+    padding: 10px 15px;
+    font-weight: bold;
+    color: #ffffff;
+    text-decoration: none;
+
+
+}
+
+.sf-menu ul>li a:hover,
+.sf-menu ul>li.active a {
+    background: #db1d24;
+}
+
+
+.has-dropdown:hover .sub-menu {
+    display: block;
+    background-color: #1a1a1a;
+    border-bottom: 2px solid white;
+}
+
+.sub-menu {
+    display: none;
+} 
