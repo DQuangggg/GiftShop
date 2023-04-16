@@ -36,6 +36,26 @@
         <servlet-name>updateCartController</servlet-name>
         <servlet-class>Controller.Cart.updateCartController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>categoryController</servlet-name>
+        <servlet-class>Controller.Category.categoryController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>contactUsController</servlet-name>
+        <servlet-class>Controller.Contact.contactUsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteContactController</servlet-name>
+        <servlet-class>Controller.Contact.deleteContactController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>managerContactController</servlet-name>
+        <servlet-class>Controller.Contact.managerContactController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>managerContactDetails</servlet-name>
+        <servlet-class>Controller.Contact.managerContactDetails</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addAccountController</servlet-name>
         <url-pattern>/addAccount</url-pattern>
@@ -71,6 +91,26 @@
     <servlet-mapping>
         <servlet-name>updateCartController</servlet-name>
         <url-pattern>/updateCartController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>categoryController</servlet-name>
+        <url-pattern>/categoryController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>contactUsController</servlet-name>
+        <url-pattern>/contactusController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteContactController</servlet-name>
+        <url-pattern>/deleteContact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>managerContactController</servlet-name>
+        <url-pattern>/managerContact</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>managerContactDetails</servlet-name>
+        <url-pattern>/contactDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
