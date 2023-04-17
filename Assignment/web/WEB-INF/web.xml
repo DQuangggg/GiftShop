@@ -64,6 +64,30 @@
         <servlet-name>managerOrderDetailsController</servlet-name>
         <servlet-class>Controller.Order.managerOrderDetailsController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>aboutUsController</servlet-name>
+        <servlet-class>Controller.Page.aboutUsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changePasswordController</servlet-name>
+        <servlet-class>Controller.Page.changePasswordController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>homePageController</servlet-name>
+        <servlet-class>Controller.Page.homePageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>loginController</servlet-name>
+        <servlet-class>Controller.Page.loginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>shopController</servlet-name>
+        <servlet-class>Controller.Page.shopController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>signUpController</servlet-name>
+        <servlet-class>Controller.Page.signUpController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addAccountController</servlet-name>
         <url-pattern>/addAccount</url-pattern>
@@ -127,6 +151,30 @@
     <servlet-mapping>
         <servlet-name>managerOrderDetailsController</servlet-name>
         <url-pattern>/cartDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>aboutUsController</servlet-name>
+        <url-pattern>/aboutUsController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changePasswordController</servlet-name>
+        <url-pattern>/changePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>homePageController</servlet-name>
+        <url-pattern>/homePageController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>shopController</servlet-name>
+        <url-pattern>/shopController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>signUpController</servlet-name>
+        <url-pattern>/sign</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
