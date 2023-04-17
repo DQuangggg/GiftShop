@@ -56,6 +56,14 @@
         <servlet-name>managerContactDetails</servlet-name>
         <servlet-class>Controller.Contact.managerContactDetails</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>managerOrderController</servlet-name>
+        <servlet-class>Controller.Order.managerOrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>managerOrderDetailsController</servlet-name>
+        <servlet-class>Controller.Order.managerOrderDetailsController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addAccountController</servlet-name>
         <url-pattern>/addAccount</url-pattern>
@@ -111,6 +119,14 @@
     <servlet-mapping>
         <servlet-name>managerContactDetails</servlet-name>
         <url-pattern>/contactDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>managerOrderController</servlet-name>
+        <url-pattern>/managerOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>managerOrderDetailsController</servlet-name>
+        <url-pattern>/cartDetails</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
