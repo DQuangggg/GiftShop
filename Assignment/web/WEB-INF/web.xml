@@ -88,6 +88,30 @@
         <servlet-name>signUpController</servlet-name>
         <servlet-class>Controller.Page.signUpController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addProductController</servlet-name>
+        <servlet-class>Controller.Product.addProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteProductController</servlet-name>
+        <servlet-class>Controller.Product.deleteProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>managerController</servlet-name>
+        <servlet-class>Controller.Product.managerController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>productController</servlet-name>
+        <servlet-class>Controller.Product.productController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>searchProductController</servlet-name>
+        <servlet-class>Controller.Product.searchProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>updateProductController</servlet-name>
+        <servlet-class>Controller.Product.updateProductController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>addAccountController</servlet-name>
         <url-pattern>/addAccount</url-pattern>
@@ -175,6 +199,30 @@
     <servlet-mapping>
         <servlet-name>signUpController</servlet-name>
         <url-pattern>/sign</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addProductController</servlet-name>
+        <url-pattern>/addProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteProductController</servlet-name>
+        <url-pattern>/deleteProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>managerController</servlet-name>
+        <url-pattern>/managerController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>productController</servlet-name>
+        <url-pattern>/productController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>searchProductController</servlet-name>
+        <url-pattern>/searchProductController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateProductController</servlet-name>
+        <url-pattern>/updateProductController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
