@@ -323,7 +323,7 @@ public class DAOProduct extends DBConnect {
                     + "      ,[productprice]\n"
                     + "      ,[productnote]\n"
                     + "      ,[cid], ROW_NUMBER() OVER(ORDER BY [pid]) RN\n"
-                    + "  FROM [giftShopDb].[dbo].[Product] \n"
+                    + "  FROM Product \n"
                     + "   Where [cid] = ?\n"
                     + "  ) t\n"
                     + "WHERE RN BETWEEN ? AND ?";

@@ -178,7 +178,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>aboutUsController</servlet-name>
-        <url-pattern>/aboutUsController</url-pattern>
+        <url-pattern>/aboutusController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>changePasswordController</servlet-name>
