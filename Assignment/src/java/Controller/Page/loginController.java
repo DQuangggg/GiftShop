@@ -5,12 +5,15 @@
 
 package Controller.Page;
 
+import DAO.DAOAccount;
+import Entity.Account;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
@@ -53,7 +56,9 @@ public class loginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        session.removeAttribute("acc");
+        response.sendRedirect("homePageController");
     } 
 
     /** 
@@ -66,7 +71,20 @@ public class loginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        String user = request.getParameter("username");
+        String pass = request.getParameter("password");
+        DAOAccount ac = new DAOAccount();
+        Account a = ac.getAccounts(user, pass);
+
+        if (a != null) {
+            HttpSession session = request.getSession();
+            session.setAttribute("acc", a);
+            response.sendRedirect("homePageController");
+        } else {
+            request.setAttribute("alertMess", "Wrong password or user");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 
     /** 
