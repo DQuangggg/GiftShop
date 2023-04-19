@@ -18,17 +18,6 @@
         <link rel="stylesheet" href="css/dropdownstyle.css" />
         <link rel="stylesheet" href="css/bestSellerStyle.css" />
         <link rel="stylesheet" href="css/checkoutStyle.css" />
-
-        <c:if test="${updatesuccess==true}">
-            <script >
-                alert('Change password successful! ');
-                if (confirm('Conntinue login?')) {
-                    window.location.href = 'homePageController';
-                } else {
-                    window.location.href = 'login';
-                }
-            </script>
-        </c:if>
     </head>
 
     <body>
@@ -241,4 +230,14 @@
             </div>
         </div>
     </body>
+    <c:if test="${updatesuccess==true}">
+            <script >
+                alert('Change password successful! ');
+                if (confirm('Conntinue login?')) {
+                    window.location.href = 'homePageController';
+                } else {
+                    window.location.href = 'login';
+                }
+            </script>
+        </c:if>
 </html>

@@ -1,6 +1,6 @@
 <%-- 
-    Document   : manager
-    Created on : Apr 18, 2023, 8:49:12 PM
+    Document   : managerContactDetails
+    Created on : Apr 19, 2023, 8:07:18 AM
     Author     : ADMIN
 --%>
 
@@ -14,6 +14,7 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/stylepage.css" />
         <link rel="stylesheet" href="css/dropdownstyle.css" />
+
         <link rel="stylesheet" href="css/managerStyle.css" />
     </head>
     <body>
@@ -32,8 +33,7 @@
                         <div class="header_search">
                             <form action="searchProductController" method="post"  >
                                 <div class="col-xs-9  col-lg-8 ">
-                                    <input id="search-field" name="q" type="search" placeholder="Search in store..."
-                                           />
+                                    <input id="search-field" name="q" type="search" placeholder="Search in store..." />
                                 </div>
                                 <div class="col-xs-3 col-lg-4 ">
                                     <button type="submit" class="btn btn-default">                                       
@@ -51,24 +51,25 @@
                             <c:when test="${sessionScope.acc==null}">
                                 <a href="login.jsp" id="customer_login_link">Log in</a>
                                 <a href="signup.jsp" id="customer_register_link">SIGN UP & SAVE 10%</a>
-                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span
-                                        class="cart-items"></span></a>
+                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
                                 </c:when>
-                                <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
+
+                            <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
-                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span
-                                        class="cart-items"></span></a>
+                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
                                 </c:when>
-                                <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
+
+                            <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
                                 <a href="managerController" id="customer_manager_link">Manager</a>
-                                </c:when>
-                            </c:choose>
+                            </c:when>
+                        </c:choose>
                     </div>
                 </div>
             </div>
+
             <div class="row-Menu">
                 <div class="clearfix" id="navigation">
                     <ul class="sf-menu">
@@ -82,99 +83,103 @@
                                 </li>
                                 <li style="width: 100%; float: none; "><a style="width: auto; float: none;" href="managerAccount">Manager Account</a>
                                 </li>
-                                
                                 <li style="width: 100%; float: none; "><a style="width: auto; float: none;" href="managerOrder">Manager Order</a>
                                 </li>
                                 <li style="width: 100%; float: none; "><a style="width: auto; float: none;" href="managerContact">Manager Contact</a>
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a  href="aboutusController">About Us</a>
+                        </li>
+                        <li class="last lastItem">
+                            <a  href="contactusController">Contact us</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
+
         <div class="container">
-            <div class="manager_bannerSet">
-                <div class="manager_left">
-                    <h1>Manager System</h1> 
-                    <div class="manager_search">
+            <div class="managet_contact">
+                <c:forEach items="${contact}" var="c">
+                    <form action="contactDetails" method="post" onsubmit="updateMessage()">
+                        <div style="color: #db1d24; text-align: left; margin-bottom: 10px; font-size: 30px">CONTACT INFORMATION</div>
 
-                        <form action="managerController" method="post">
-                            <div class="">
-                                <input id="search-byid" name="pid" type="search" placeholder="Search product by id..." value="${searchMessage}" pattern="[0-9]{0,}" title="Please input number only."/>
-                                <button type="submit" class="button_searchbyid">
-                                    Search
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                    <a href="addProductController">Add Product</a>
-                </div>
-            </div>
-                                
-            <div class="managet_product">
-                <table class="table bordered 3px ">
-                    <thead >
-                        <tr>
-                            <td><b>ID</b></td>
-                            <td><b>Name</b></td>
-                            <td><b>IMG</b></td>
-                            <td><b>Price</b></td>
-                            <td><b>Action</b></td>
-                        </tr>
-                    </thead>
-                    <c:forEach items="${listP}" var="p">
-                        <tr>
-                            <th  scope="row" style="text-align: center">${p.pid}</th>
-                            <td >${p.productName}</td>
-                            <td> <img style="width:180px;"
-                                      src="${p.productImg}"
-                                      class="img-responsive" /></td>
-                            <td>${p.productPrice}$</td>
-                            <td><a href="updateProductController?pid=${p.pid}" id="bt_update">
-                                    <img style="width:30px;"
-                                         src="images/editIcon.png"
-                                         class="img-responsive" />
-                                </a>
-                                <a href="deleteProductController?pid=${p.pid}"" id="bt_delete" onclick="confirmDelete(${p.pid})">
-                                    <img style="width:30px;"
-                                         src="images/deleteIcon.png" /></a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </div>
-                                
-            <c:if test="${totalpage!=null}">  
-                <div class="row">
-                    <div id="pagination">
-                        <span class="prev"><a title="" href="managerController?page=${pageCurrent-1>0?pageCurrent-1:"1"}">«
-                                Previous</a></span>
-                                <c:if test="${pageCurrent-1>0}">
-                                <span class=""><a title="" href="managerController?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
-                            </c:if>
-                            <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg">
-                                <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="managerController?page=${pg}">${pg}</a></span>
-                            </c:forEach>
+                        <label>ID : </label>
+                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text" value="${c.contactid}" name="contactid"  readonly />
+                        <br/>
 
-                        <span class="next"><a title="" href="managerController?page=${pageCurrent+1>totalpage?totalpage:pageCurrent+1}">Next
-                                »</a></span>
-                    </div>
-                </c:if> 
-            </div>
+                        <label>First Name :</label>
+                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px"  
+                               type="text" value="${c.firstName}" name="firstName" readonly/>
+                        <br/>
+
+                        <label>Last Name :</label>
+                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px"  
+                               type="text" value="${c.lastName}" name="lastName" readonly/>
+                        <br/>
+
+                        <label>Email :</label>
+                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px"  
+                               type="text" value="${c.email}" name="email"  readonly/>
+                        <br/>
+
+                        <label>Phone :</label>
+                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px"  
+                               type="number" value="${c.phone}" name="phone"  readonly/>
+                        <br/>
+
+                        <label>Message :</label>
+                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text"  value="${c.message}" name="message"  readonly/>
+                        <br/>
+
+                        <label>Date : </label>
+                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px"  
+                               type="text" value="${c.contactDate}" name="contactDate" readonly/>
+                        <br/>
+
+                        <label>Category: </label>
+                        <input type="radio" name="status"  value="1" ${c.status == 1 ? "checked" : "" }> Readed
+                        <input type="radio" name="status"  value="0" ${c.status == 0 ? "checked" : "" }> Unread
+                        <br/>
+
+                        <button>Update</button>
+
+                    </form>   
+                </c:forEach>
+            </div>                                                         
         </div>
-                                
         <div class="container-fluid ">
-            <div class="row">
-            </div>
             <div class="row_footer1">
                 <div class="col-md-3  custom_footer custom_footer1">
                     <h3>Menu</h3>
                     <ul class="list">
+
                         <li class="firstItem"><a title="" href="homePageController">Home</a></li>
+
                         <li><a title="" href="shopController">Shop</a></li>
+
                         <li><a title="" href="aboutusController">About Us</a></li>
+
                         <li class="lastItem"><a title="" href="contactusController">Contact us</a></li>
+
                     </ul>
                 </div>
                 <div class="col-md-3  custom_footer custom_footer2">
@@ -185,17 +190,17 @@
                             </c:forEach>
                     </ul>
                 </div>
+
                 <div class="col-md-3  custom_footer custom_footer3">
                     <h3>Information</h3>
                     <ul class="list">
-                        
-                        <li class="lastItem"><a title="" href="/cart">My cart</a></li>
-                        
-                        <c:if test="${sessionScope.acc!=null}">
+                        <li class="lastItem"><a title="" href="showCartController">My cart</a></li>
+                            <c:if test="${sessionScope.acc!=null}">
                             <li class=""><a title="" href="changePassword">Change Password</a></li>
                             </c:if>
                     </ul>
                 </div>
+
                 <div class="col-md-3  custom_footer custom_footer4">
                     <h3>Contacts</h3>
                     <ul>
@@ -206,12 +211,10 @@
                 </div>
             </div>
         </div>
-    </body>
-    <script>
-        function confirmDelete(id) {
-            if (confirm('Are you want to delete product have Id: ' + id + '?')) {
-                window.location.href = 'deleteProductController?pid=' + id;
-                window.alert('Delete successfully!');
+        <script>
+            function updateMessage() {
+                alert("Update contact successful!");
             }
-    </script>
+        </script>
+    </body>
 </html>
