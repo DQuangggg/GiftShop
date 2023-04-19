@@ -91,12 +91,6 @@
 
                             </ul>
                         </li>
-                        <li>
-                            <a  href="aboutusController">About Us</a>
-                        </li>
-                        <li class="last lastItem">
-                            <a  href="contactusController">Contact us</a>
-                        </li>
                     </ul>
                 </div>
             </div>

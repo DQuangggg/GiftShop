@@ -64,7 +64,8 @@ public class DAOContact extends DBConnect {
                     + "      ,[contactdate]\n"
                     + "      ,[status]\n"
                     + "  FROM [dbo].[Contact]"
-                    + "  Where [contactid] like ?\n";
+                    + "  Where [contactid] like ?\n"
+                    + "  ORDER BY contactid DESC";
             PreparedStatement statement = connection.prepareStatement(sqlquery);
             statement.setString(1, "%" + id + "%");
             ResultSet rs = statement.executeQuery();
@@ -190,6 +191,7 @@ public class DAOContact extends DBConnect {
 
     public static void main(String[] args) {
         DAOContact dao = new DAOContact();
-        dao.updateContact(new Contact(3, "", "", "", "", "", "", 1));
+        System.out.println(dao.getContactById(""));
+        //dao.updateContact(new Contact(3, "", "", "", "", "", "", 1));
     }
 }

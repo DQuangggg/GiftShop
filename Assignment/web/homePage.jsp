@@ -32,7 +32,7 @@
                         <div class="header_search">
                             <form action="searchProductController" method="post" >
                                 <div class="col-xs-9  col-lg-8 ">
-                                     <input id="search-field" name="q" type="search" placeholder="Search in store..." value="${textsearch}"/>
+                                    <input id="search-field" name="q" type="search" placeholder="Search in store..." value="${textsearch}"/>
                                 </div>
                                 <div class="col-xs-3 col-lg-4 ">
                                     <button type="submit" class="btn btn-default">                                       
@@ -70,24 +70,63 @@
             </div>
             <div class="row-Menu">
                 <div class="clearfix" id="navigation">
-                    <ul class="sf-menu">
+                    <c:choose>
+                        <c:when test="${sessionScope.acc==null}">
+                            <ul class="sf-menu">
 
-                        <li class="active firstItem">
-                            <a href="homePageController">Home</a>
-                        </li>
+                                <li class="active firstItem">
+                                    <a href="homePageController">Home</a>
+                                </li>
 
-                        <li class="has-dropdown">
-                            <a href="shopController">Shop</a>
-                        </li>
+                                <li class="has-dropdown">
+                                    <a href="shopController">Shop</a>
+                                </li>
 
-                        <li>
-                            <a  href="aboutusController">About Us</a>
-                        </li>
+                                <li>
+                                    <a  href="aboutusController">About Us</a>
+                                </li>
 
-                        <li class="last lastItem">
-                            <a  href="contactusController">Contact us</a>
-                        </li>
-                    </ul>
+                                <li class="last lastItem">
+                                    <a  href="contactusController">Contact us</a>
+                                </li>
+                            </ul>
+                        </c:when>
+
+                        <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
+                            <ul class="sf-menu">
+
+                                <li class="active firstItem">
+                                    <a href="homePageController">Home</a>
+                                </li>
+
+                                <li class="has-dropdown">
+                                    <a href="shopController">Shop</a>
+                                </li>
+
+                                <li>
+                                    <a  href="aboutusController">About Us</a>
+                                </li>
+
+                                <li class="last lastItem">
+                                    <a  href="contactusController">Contact us</a>
+                                </li>
+                            </ul>
+                        </c:when>
+
+                        <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
+                            <ul class="sf-menu">
+
+                                <li class="active firstItem">
+                                    <a href="homePageController">Home</a>
+                                </li>
+
+                                <li class="has-dropdown">
+                                    <a href="shopController">Shop</a>
+                                </li>
+
+                            </ul>
+                        </c:when>
+                    </c:choose>
                 </div>
             </div>
             <div class="rowBanner">

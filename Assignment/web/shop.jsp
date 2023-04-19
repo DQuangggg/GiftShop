@@ -51,14 +51,14 @@
                                 <a href="login.jsp" id="customer_login_link">Log in</a>
                                 <a href="signup.jsp" id="customer_register_link">SIGN UP & SAVE 10%</a>
                                 <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
-                            </c:when>
-                                
+                                </c:when>
+
                             <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
                                 <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
-                            </c:when>
-                                
+                                </c:when>
+
                             <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
@@ -71,27 +71,74 @@
             </div>
             <div class="row-Menu">
                 <div class="clearfix" id="navigation">
-                    <ul class="sf-menu">
-                        <li class="first ${cid==null?"active":""} firstItem">
-                            <a  href="shopController">Shop</a>
-                        </li>
-                        <li class="has-dropdown">
-                            <a title="" class="${cid!=null?"active":""}">Catalog</a>
-                            <ul class="sub-menu" style="width: 235px; ">
-                                <c:forEach items="${listC}" var="c">
-                                    <li style="width: 100%; float: none;"><a class="${cid==c.cid?"active":""}"
-                                                                             style="width: auto; float: none;" href="categoryController?cid=${c.cid}">${c.categoryName}</a>
-                                    </li>
-                                </c:forEach>
+                    <c:choose>
+                        <c:when test="${sessionScope.acc==null}">
+                            <ul class="sf-menu">
+                                <li class="first ${cid==null?"active":""} firstItem">
+                                    <a  href="shopController">Shop</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a title="" class="${cid!=null?"active":""}">Catalog</a>
+                                    <ul class="sub-menu" style="width: 235px; ">
+                                        <c:forEach items="${listC}" var="c">
+                                            <li style="width: 100%; float: none;"><a class="${cid==c.cid?"active":""}"
+                                                                                     style="width: auto; float: none;" href="categoryController?cid=${c.cid}">${c.categoryName}</a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a  href="aboutusController">About Us</a>
+                                </li>
+                                <li class="last lastItem">
+                                    <a  href="contactusController">Contact us</a>
+                                </li>
                             </ul>
-                        </li>
-                        <li>
-                            <a  href="aboutusController">About Us</a>
-                        </li>
-                        <li class="last lastItem">
-                           <a  href="contactusController">Contact us</a>
-                        </li>
-                    </ul>
+                        </c:when>
+
+                        <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
+                            <ul class="sf-menu">
+                                <li class="first ${cid==null?"active":""} firstItem">
+                                    <a  href="shopController">Shop</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a title="" class="${cid!=null?"active":""}">Catalog</a>
+                                    <ul class="sub-menu" style="width: 235px; ">
+                                        <c:forEach items="${listC}" var="c">
+                                            <li style="width: 100%; float: none;"><a class="${cid==c.cid?"active":""}"
+                                                                                     style="width: auto; float: none;" href="categoryController?cid=${c.cid}">${c.categoryName}</a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a  href="aboutusController">About Us</a>
+                                </li>
+                                <li class="last lastItem">
+                                    <a  href="contactusController">Contact us</a>
+                                </li>
+                            </ul>
+                        </c:when>
+
+                        <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
+                            <ul class="sf-menu">
+                                <li class="first ${cid==null?"active":""} firstItem">
+                                    <a  href="shopController">Shop</a>
+                                </li>
+                                <li class="has-dropdown">
+                                    <a title="" class="${cid!=null?"active":""}">Catalog</a>
+                                    <ul class="sub-menu" style="width: 235px; ">
+                                        <c:forEach items="${listC}" var="c">
+                                            <li style="width: 100%; float: none;"><a class="${cid==c.cid?"active":""}"
+                                                                                     style="width: auto; float: none;" href="categoryController?cid=${c.cid}">${c.categoryName}</a>
+                                            </li>
+                                        </c:forEach>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </c:when>
+                    </c:choose>
+
                 </div>
             </div>
         </div>
@@ -107,23 +154,66 @@
             </div>
 
             <div class="row">
-                <c:forEach items="${listP}" var="p">
-                    <div class="col-md-3">
-                        <div>
-                            <a href="productController?pid=${p.pid}" > 
-                                <img src="${p.productImg}" class="img-responsive" />
-                            </a>
-                            <div class="item">
-                                <p class="item-title">${p.productName}</p>
-                                <p>
-                                    Price: 
-                                    <span style="color: #f72b2f; margin-left: 10px; font-size: 20px">${p.productPrice} $ </span>
-                                    <a href="cartController?pid=${p.pid}" id="add_cart">Add to cart </a>
-                                </p>
+                <c:choose>
+                    <c:when test="${sessionScope.acc==null}">
+                        <c:forEach items="${listP}" var="p">
+                            <div class="col-md-3">
+                                <div>
+                                    <a href="productController?pid=${p.pid}" > 
+                                        <img src="${p.productImg}" class="img-responsive" />
+                                    </a>
+                                    <div class="item">
+                                        <p class="item-title">${p.productName}</p>
+                                        <p>
+                                            Price: 
+                                            <span style="color: #f72b2f; margin-left: 10px; font-size: 20px">${p.productPrice} $ </span>
+                                            <a href="cartController?pid=${p.pid}" id="add_cart">Add to cart </a>
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </c:forEach>
+                        </c:forEach>
+                    </c:when>
+
+                    <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
+                        <c:forEach items="${listP}" var="p">
+                            <div class="col-md-3">
+                                <div>
+                                    <a href="productController?pid=${p.pid}" > 
+                                        <img src="${p.productImg}" class="img-responsive" />
+                                    </a>
+                                    <div class="item">
+                                        <p class="item-title">${p.productName}</p>
+                                        <p>
+                                            Price: 
+                                            <span style="color: #f72b2f; margin-left: 10px; font-size: 20px">${p.productPrice} $ </span>
+                                            <a href="cartController?pid=${p.pid}" id="add_cart">Add to cart </a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+
+                    <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
+                        <c:forEach items="${listP}" var="p">
+                            <div class="col-md-3">
+                                <div>
+                                    <a href="productController?pid=${p.pid}" > 
+                                        <img src="${p.productImg}" class="img-responsive" />
+                                    </a>
+                                    <div class="item">
+                                        <p class="item-title">${p.productName}</p>
+                                        <p>
+                                            Price: 
+                                            <span style="color: #f72b2f; margin-left: 10px; font-size: 20px">${p.productPrice} $ </span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </c:when>
+                </c:choose>
             </div>
 
             <div class="row">
@@ -133,12 +223,12 @@
                             <div id="pagination">
                                 <span class="prev"><a title="" href="searchProductController?q=${textsearch}&page=${pageCurrent-1>0?pageCurrent-1:"1"}">«
                                         Previous</a></span>
-                                    <c:if test="${pageCurrent-1>0}">
-                                            <span class=""><a title="" href="searchProductController?q=${textsearch}&page=${pageCurrent-1}">${pageCurrent-1}</a></span>
+                                        <c:if test="${pageCurrent-1>0}">
+                                    <span class=""><a title="" href="searchProductController?q=${textsearch}&page=${pageCurrent-1}">${pageCurrent-1}</a></span>
                                     </c:if>      
-                                            
-                                    <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg">
-                                        <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="searchProductController?q=${textsearch}&page=${pg}">${pg}</a></span>
+
+                                <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg">
+                                    <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="searchProductController?q=${textsearch}&page=${pg}">${pg}</a></span>
                                     </c:forEach>
                                 <span class="next"><a title="" href="searchProductController?q=${textsearch}&page=${pageCurrent+1>totalpage?totalpage:pageCurrent+1}">Next »</a></span>
                             </div>
@@ -161,18 +251,18 @@
                                     »</a></span>
                         </div>
                     </c:when>
-                    
+
                     <c:otherwise>
                         <div id="pagination">
                             <span class="prev"><a title="" href="shopController?page=${pageCurrent-1>0?pageCurrent-1:"1"}">« Previous</a>
                             </span>
                             <c:if test="${pageCurrent-1>0}">
                                 <span class=""><a title="" href="shopController?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
-                            </c:if>
-                                
+                                </c:if>
+
                             <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg"> 
                                 <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="shopController?page=${pg}">${pg}</a></span>
-                            </c:forEach>
+                                </c:forEach>
 
                             <span class="next"><a title="" href="shopController?page=${pageCurrent+4>totalpage?totalpage:pageCurrent+4}">Next »</a></span>
                         </div>
@@ -181,7 +271,7 @@
             </div>
         </div>
     </div>
-    
+
     <div class="container-fluid ">
         <div class="row">
         </div>
@@ -213,9 +303,9 @@
                 <h3>Information</h3>
                 <ul class="list">
                     <li class="lastItem"><a title="" href="showCartController">My cart</a></li>
-                    <c:if test="${sessionScope.acc!=null}">
+                        <c:if test="${sessionScope.acc!=null}">
                         <li class=""><a title="" href="changePassword">Change Password</a></li>
-                    </c:if>
+                        </c:if>
                 </ul>
             </div>
 

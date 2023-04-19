@@ -1,6 +1,6 @@
 <%-- 
-    Document   : managerContact
-    Created on : Apr 19, 2023, 7:48:44 AM
+    Document   : managerOrderDetails
+    Created on : Apr 19, 2023, 8:13:00 PM
     Author     : ADMIN
 --%>
 
@@ -95,69 +95,107 @@
         </div>
 
         <div class="container">
-            <div class="manager_bannerSet">
-                <div class="manager_left">
-                    <b>Manager System</b> 
-                    <div class="manager_search">
-                        <form action="managerContact" method="post">
-                            <div class="">
-                                <input id="search-byid" name="coid" type="search" placeholder="Search contact by id..." value="${searchMessage}" pattern="[0-9]{1,}" title="Please input number only."/>
-                                <button type="submit" class="button_searchbyid">
-                                    Search
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+            <div class="managet_contact">
 
-            </div>
-            <div class="managet_product">
-                <table class="table table table-striped  ">
-                    <thead >
-                        <tr>
-                            <td><b>Contact ID</b></td>
-                            <td><b>Name</b></td>
-                            <td><b>Email</b></td>
-                            <td><b>Contact Date</b></td>
-                            <td><b>Status</b></td>
-                            <td><b>More Details</b></td>
-                            <td><b>Action</b></td>
-                        </tr>
-                    </thead>
-                    <c:forEach items="${listCO}" var="co">
-                        <tr>
-                            <th  scope="row" style="text-align: center">${co.contactid}</th>
-                            <td>${co.firstName} ${co.lastName}</td>
-                            <td>${co.email}</td>
-                            <td>${co.contactDate}</td>
-                            <td>${co.status == 1 ? "Readed" : "Unread"}</td>
-                            <td><a href="contactDetails?contactid=${co.contactid}">Details</a></td>
-                            <td>
-                                <a href="#" onclick="confirmDelete(${co.contactid})"><img style="width:30px;"
-                                                                                   src="images/deleteIcon.png" />
-                                </a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
-            </div>
-            <c:if test="${totalpage!=null}">                   
-                <div class="row">
-                    <div id="pagination">
-                        <span class="prev"><a title="" href="managerContact?page=${pageCurrent-1>0?pageCurrent-1:"1"}">«
-                                Previous</a></span>
-                                <c:if test="${pageCurrent-1>0}">
-                            <span class=""><a title="" href="managerContact?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
+                <form action="cartDetails" method="post" onsubmit="updateMessage()">
+                    <div style="color: #db1d24; text-align: left; margin-bottom: 10px; font-size: 30px">ORDER INFORMATION</div>
+
+                    <label>Order ID : </label>
+                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text" value="${cart.cartid}" name="orderid"  readonly />
+                        <br/>
+
+                    <label>Customer ID : </label>
+                        <c:forEach items="${listO}" var="o"> 
+                            <c:if test="${cart.cartid == o.orderid}"> 
+                                <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text" value="${o.custid}" name="custid"  readonly />
                             </c:if>
-                            <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg">
-                            <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="managerContact?page=${pg}">${pg}</a></span>
-                            </c:forEach>
+                        </c:forEach>
+                        <br/>
 
-                        <span class="next"><a title="" href="managerContact?page=${pageCurrent+1>totalpage?totalpage:pageCurrent+1}">Next
-                                »</a></span>
-                    </div>
-                </div>
-            </c:if>                                                          
+                    <label>Customer Name : </label>
+                        <c:forEach items="${listO}" var="o">
+                            <c:forEach items="${listCU}" var="c">
+                                <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                    <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text" value="${c.firstname} ${c.lastname}" name="name"  readonly />
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                        <br/>
+
+                    <label>Address : </label>
+                        <c:forEach items="${listO}" var="o">
+                            <c:forEach items="${listCU}" var="c">
+                                <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                    <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text" value="${c.address}" name="address"  readonly />
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                        <br/>
+
+                    <label>City : </label>
+                        <c:forEach items="${listO}" var="o">
+                            <c:forEach items="${listCU}" var="c">
+                                <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                    <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text" value="${c.city}" name="city"  readonly />
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                        <br/>
+
+
+                    <label>Phone : </label>
+                        <c:forEach items="${listO}" var="o">
+                            <c:forEach items="${listCU}" var="c">
+                                <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                    <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text" value="${c.phone}" name="phone"  readonly />
+                                </c:if>
+                            </c:forEach>
+                        </c:forEach>
+                        <br/>    
+
+                    <label>Order Date : </label>
+                        <c:forEach items="${listO}" var="o"> 
+                            <c:if test="${cart.cartid == o.orderid}"> 
+                                <input style =" border-top-style: hidden; border-right-style: hidden;
+                               border-left-style: hidden;
+                               border-bottom-style: hidden; font-size: 20px" 
+                               type="text" value="${o.orderDate}" name="orderdate"  readonly /></c:if>
+                        </c:forEach>
+                        <br/> 
+  
+                        
+                    <label>Status : </label>
+                        <c:forEach items="${listO}" var="o"> 
+                            <c:if test="${cart.cartid == o.orderid }">                         
+                                <input type="radio" name="status"  value="2" ${o.status == 2 ? "checked" : "" }> Done
+                                <input type="radio" name="status"  value="1" ${o.status == 1 ? "checked" : "" }> Process
+                                <input type="radio" name="status"  value="0" ${o.status == 0 ? "checked" : "" }> Wait 
+                            </c:if>
+                        </c:forEach>
+                        <br/> 
+
+                        <button >Save</button>
+                </form>
+
+            </div>                                                         
         </div>
         <div class="container-fluid ">
             <div class="row">
@@ -206,13 +244,10 @@
                 </div>
             </div>
         </div>
-    </body>
         <script>
-        function confirmDelete(id) {
-            if (confirm('Are you want to delete contact have Id: ' + id + '?')) {
-                window.location.href = 'deleteContact?contactid=' + id;
-                window.alert('Delete successfully!');
+            function updateMessage() {
+                alert("Update order successful!");
             }
-        }
-    </script>
+        </script>
+    </body>
 </html>
