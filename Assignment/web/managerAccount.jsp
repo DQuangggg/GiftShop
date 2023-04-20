@@ -134,7 +134,7 @@
                             <td><b>ID</b></td>
                             <td><b>Username</b></td>
                             <td><b>Password</b></td>
-                            <td><b>Role</b></td>
+                            <td><b>Admin</b></td>
                             <td><b>Action</b></td>
                         </tr>
                     </thead>
@@ -144,7 +144,7 @@
                             <th  scope="row" style="text-align: center">${a.aid}</th>
                             <td>${a.user}</td>
                             <td>${a.pass}</td>
-                            <td>${a.isAdmin == true ? "Admin" : "Not Admin"}</td>
+                            <td><input type="checkbox" ${a.isAdmin == true ? "checked":""} /></td>
                             <td><a href="updateAccount?aid=${a.aid}"><img style="width:30px;"
                                                                           src="images/editIcon.png"/>
                                 </a>

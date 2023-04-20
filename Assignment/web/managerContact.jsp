@@ -131,7 +131,7 @@
                             <td><b>Name</b></td>
                             <td><b>Email</b></td>
                             <td><b>Contact Date</b></td>
-                            <td><b>Status</b></td>
+                            <td><b>Readed</b></td>
                             <td><b>More Details</b></td>
                             <td><b>Action</b></td>
                         </tr>
@@ -142,7 +142,7 @@
                             <td>${co.firstName} ${co.lastName}</td>
                             <td>${co.email}</td>
                             <td>${co.contactDate}</td>
-                            <td>${co.status == 1 ? "Readed" : "Unread"}</td>
+                            <td><input type="checkbox" ${co.status == 1 ? "checked":""} /></td>
                             <td><a href="contactDetails?contactid=${co.contactid}">Details</a></td>
                             <td>
                                 <a href="#" onclick="confirmDelete(${co.contactid})"><img style="width:30px;"
