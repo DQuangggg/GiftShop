@@ -51,11 +51,10 @@ public class DAOOrder extends DBConnect {
         ArrayList<Order> listOrder = new ArrayList<>();
         try {
             String sqlquery = "SELECT [orderid] ,a.[custid]  ,[orderdate] ,[status] FROM [giftShop].[dbo].[Order] a inner join \n"
-                    + "[giftShop].[dbo].[Customer] b on a.custid = b.custid Where b.firstname like ? or b.lastname like ?";
+                    + "[giftShop].[dbo].[Customer] b on a.custid = b.custid Where orderid like ?  ORDER BY orderid DESC";
 
             PreparedStatement statement = connection.prepareStatement(sqlquery);
             statement.setString(1, "%" + id + "%");
-            statement.setString(2, "%" + id + "%");
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Order o = new Order();
@@ -71,14 +70,14 @@ public class DAOOrder extends DBConnect {
         return listOrder;
     }
 
-    public ArrayList<Order> getOrdersByStatus(String status) {
+    public ArrayList<Order> getOrdersByStatus(int status) {
         ArrayList<Order> listOrder = new ArrayList<>();
         try {
             String sqlquery = "SELECT [orderid] ,a.[custid]  ,[orderdate] ,[status] FROM [giftShop].[dbo].[Order] a inner join \n"
                     + "[giftShop].[dbo].[Customer] b on a.custid = b.custid Where a.status = ?";
 
             PreparedStatement statement = connection.prepareStatement(sqlquery);
-            statement.setString(1, status);
+            statement.setInt(1, status);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 Order o = new Order();
@@ -93,6 +92,7 @@ public class DAOOrder extends DBConnect {
         }
         return listOrder;
     }
+
 
     public int getLastIdOfOrder() {
         int lastOrderId = 0;
@@ -223,6 +223,5 @@ public class DAOOrder extends DBConnect {
 
     public static void main(String[] args) {
         DAOOrder dao = new DAOOrder();
-        System.out.println(dao.getOrdersByStatus("1"));
     }
 }

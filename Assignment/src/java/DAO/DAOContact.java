@@ -87,6 +87,40 @@ public class DAOContact extends DBConnect {
         return listContact;
     }
 
+    public ArrayList<Contact> getContactByStatus(int status) {
+        ArrayList<Contact> listContact = new ArrayList<>();
+        try {
+            String sqlquery = "SELECT [contactid]\n"
+                    + "      ,[firstname]\n"
+                    + "      ,[lastname]\n"
+                    + "      ,[email]\n"
+                    + "      ,[phone]\n"
+                    + "      ,[message]\n"
+                    + "      ,[contactdate]\n"
+                    + "      ,[status]\n"
+                    + "  FROM [dbo].[Contact]"
+                    + "  Where [status] = ?\n";
+            PreparedStatement statement = connection.prepareStatement(sqlquery);
+            statement.setInt(1, status);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Contact co = new Contact();
+                co.setContactid(rs.getInt("contactid"));
+                co.setFirstName(rs.getString("firstname"));
+                co.setLastName(rs.getString("lastname"));
+                co.setEmail(rs.getString("email"));
+                co.setPhone(rs.getString("phone"));
+                co.setMessage(rs.getString("message"));
+                co.setContactDate(rs.getString("contactdate"));
+                co.setStatus(rs.getInt("status"));
+                listContact.add(co);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(DAOContact.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listContact;
+    }
+
     public void insertContact(Contact con) {
         try {
             String sql = "INSERT INTO Contact(firstname,lastname,email,phone,message,contactdate,status) \n"

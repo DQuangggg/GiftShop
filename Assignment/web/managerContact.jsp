@@ -101,12 +101,24 @@
                     <div class="manager_search">
                         <form action="managerContact" method="post">
                             <div class="">
-                                <input id="search-byid" name="coid" type="search" placeholder="Search contact by id..." value="${searchMessage}" pattern="[0-9]{1,}" title="Please input number only."/>
+                                <input id="search-byid" name="coid" type="number" placeholder="Search contact by id..." value="${searchMessage}" pattern="[0-9]{1,}" title="Please input number only."/>
                                 <button type="submit" class="button_searchbyid">
                                     Search
                                 </button>
                             </div>
                         </form>
+
+                        <div class="manager_filter">
+                            <form style="float: right;" action="managerContact" method="get">
+                                Status :
+                                <select name="status">
+                                    <option value="-1">All</option>
+                                    <option value="1">Readed</option>
+                                    <option value="0">Unread</option>
+                                </select>
+                                <input type="submit" value="Filter">
+                            </form>
+                        </div>
                     </div>
                 </div>
 
@@ -134,7 +146,7 @@
                             <td><a href="contactDetails?contactid=${co.contactid}">Details</a></td>
                             <td>
                                 <a href="#" onclick="confirmDelete(${co.contactid})"><img style="width:30px;"
-                                                                                   src="images/deleteIcon.png" />
+                                                                                          src="images/deleteIcon.png" />
                                 </a>
                             </td>
                         </tr>
@@ -207,7 +219,7 @@
             </div>
         </div>
     </body>
-        <script>
+    <script>
         function confirmDelete(id) {
             if (confirm('Are you want to delete contact have Id: ' + id + '?')) {
                 window.location.href = 'deleteContact?contactid=' + id;

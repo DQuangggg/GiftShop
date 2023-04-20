@@ -53,15 +53,15 @@
                                 <a href="login.jsp" id="customer_login_link">Log in</a>
                                 <a href="signup.jsp" id="customer_register_link">SIGN UP & SAVE 10%</a>
                                 <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
-                            </c:when>
-                                
+                                </c:when>
+
                             <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
                                 <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
-                            </c:when>
-                            
-                                <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
+                                </c:when>
+
+                            <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
                                 <a href="managerController" id="customer_manager_link">Manager</a>
@@ -70,14 +70,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row-Menu">
                 <div class="clearfix" id="navigation">
                     <ul class="sf-menu">
                         <li class="firstItem">
                             <a  href="homePageController">Home</a>
                         </li>
-                       <li class="has-dropdown">
+                        <li class="has-dropdown">
                             <a title="" class="active" >Manager</a>
                             <ul class="sub-menu" style="width: 235px; ">
                                 <li style="width: 100%; float: none; "><a style="width: auto; float: none;" href="managerController">Manager Product</a>
@@ -101,16 +101,29 @@
                 <div class="manager_left">
                     <b>Manager System</b> 
                     <div class="manager_search">
-                       <form action="managerAccount" method="post">
+                        <form action="managerAccount" method="post">
                             <div class="">
-                                <input id="search-byid" name="aid" type="search" placeholder="Search account by name..." value="${searchMessage}" />
+                                <input id="search-byid" name="aid" type="text" placeholder="Search account by name..." value="${searchMessage}" />
                                 <button type="submit" class="button_searchbyid">
                                     Search
                                 </button>
                             </div>
                         </form>
                     </div>
-                    <a href="addAccount">Add Account</a>
+                          
+                     <a style="float: right;" href="addAccount">Add Account</a> 
+                                
+                   
+<!--                        <form style="float: right;" action="managerAccount" method="get">
+                            Role :
+                            <select name="role">
+                                <option value="-1">All</option>
+                                <option value="1">Admin</option>
+                                <option value="0">Not Admin</option>
+                            </select>
+                            <input type="submit" value="Filter">
+                        </form>-->
+                                  
                 </div>
 
             </div>
@@ -121,7 +134,7 @@
                             <td><b>ID</b></td>
                             <td><b>Username</b></td>
                             <td><b>Password</b></td>
-                            <td><b>IsAdmin</b></td>
+                            <td><b>Role</b></td>
                             <td><b>Action</b></td>
                         </tr>
                     </thead>
@@ -131,7 +144,7 @@
                             <th  scope="row" style="text-align: center">${a.aid}</th>
                             <td>${a.user}</td>
                             <td>${a.pass}</td>
-                            <td>${a.isAdmin}</td>
+                            <td>${a.isAdmin == true ? "Admin" : "Not Admin"}</td>
                             <td><a href="updateAccount?aid=${a.aid}"><img style="width:30px;"
                                                                           src="images/editIcon.png"/>
                                 </a>
@@ -143,7 +156,7 @@
                     </c:forEach>
                 </table>
             </div>
-                                
+
             <c:if test="${totalpage!=null}">                   
                 <div class="row">
                     <div id="pagination">
@@ -163,13 +176,13 @@
         </div>
         <div class="container-fluid ">
             <div class="row">
-           </div>
+            </div>
             <div class="row_footer1">
                 <div class="col-md-3  custom_footer custom_footer1">
                     <h3>Menu</h3>
                     <ul class="list">
                         <li class="firstItem"><a title="" href="homePageController">Home</a></li>
-                        
+
                         <li><a title="" href="shopController">Shop</a></li>
 
                         <li><a title="" href="aboutusController">About Us</a></li>
@@ -182,7 +195,7 @@
                     <ul class="list">
                         <c:forEach items="${listC}" var="c" >
                             <li> <a title="" href="categoryController?cid=${c.cid}">${c.categoryName}</a></li>
-                        </c:forEach>
+                            </c:forEach>
                     </ul>
                 </div>
 
@@ -190,9 +203,9 @@
                     <h3>Information</h3>
                     <ul class="list">
                         <li class="lastItem"><a title="" href="showCartController">My cart</a></li>
-                        <c:if test="${sessionScope.acc!=null}">
+                            <c:if test="${sessionScope.acc!=null}">
                             <li class=""><a title="" href="changePassword">Change Password</a></li>
-                        </c:if>
+                            </c:if>
                     </ul>
                 </div>
 

@@ -136,7 +136,7 @@
                                          src="images/editIcon.png"
                                          class="img-responsive" />
                                 </a>
-                                <a href="deleteProductController?pid=${p.pid}" id="bt_delete" onclick="confirmDelete(${p.pid})">
+                                <a href="#" onclick="confirmDelete(${p.pid})" id="bt_delete" >
                                     <img style="width:30px;"
                                          src="images/deleteIcon.png" /></a>
                             </td>
@@ -208,10 +208,11 @@
         </div>
     </body>
     <script>
-        function confirmDelete(pid) {
-            if (confirm('Are you want to delete product have Id: ' + pid + '?')) {
-                window.location.href = 'deleteProductController?pid=' + pid;
+        function confirmDelete(proid) {
+            if (confirm('Are you want to delete account have Id: ' + proid + '?')) {
+                window.location.href = 'deleteProductController?pid=' + proid;
                 window.alert('Delete successfully!');
             }
+        }
     </script>
 </html>

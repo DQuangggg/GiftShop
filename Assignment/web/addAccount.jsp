@@ -4,50 +4,42 @@
     Author     : ADMIN
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Add Product</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
         <link rel="stylesheet" href="css/formStyle.css" />
-
     </head>
     <body>
         <div class="form_page">
-            <div class="form" >
-
-                <form action="addProductController" method="post" onsubmit="addProductMessage()">
-                    <div style="color: #db1d24; text-align: center; margin-bottom: 10px;font-size: 30px">PRODUCT INFORMATION</div>
-                    <label>Name :</label>
-                    <input type="text" placeholder="Enter product name"  name="productName" required/>
-
-                    <label>Image :</label>
-                    <input type="url" placeholder="Enter product image link" name="productImg" required/>
-
-                    <label>Price :</label>
-                    <input type="number" placeholder="Enter product price" name="productPrice" min="1" required/>
-
-                    <label>Note : </label>
-                    <input type="text" placeholder="Note" name="productNote" required/>
+            <div class="form">
+                <form  action="addAccount" method="post">
+                    <div style="color: #db1d24; text-align: center; margin-bottom: 10px; font-size: 30px">ACCOUNT INFORMATION</div>
+                    <label>User Name :</label>
+                    <input type="text" placeholder="Username" name="username"  pattern="^[a-zA-Z][a-zA-Z0-9]{2,15}" title="User name must be start with letter and contains only letter and number. And must have at least 3 characters and max 16 characters." required/>
                     
-                    <label>Category: </label>
-                    <select name="productCategory" id="sl_category" style="margin-bottom: 10px; font-size: 20px; width: 300px;">
-                        <c:forEach items="${listC}" var="c"> 
-                            <option value="${c.cid}">${c.categoryName}</option>
-                        </c:forEach>
+                    <label>Password :</label>
+                    <input type="password" placeholder="Password" name="password"  pattern=".{3,16}" title="Password must have at least 3 characters and max 16 characters."  required/>
+                    <label>Admin: </label>
+                    
+                    <select name="isAdmin"  style="margin-bottom: 10px; font-size: 20px; width: 300px;">
+                        <option value="true">Is Admin</option>
+                        <option value="false"selected>Not Admin</option>
                     </select>
+                    
+                    <div class="alert_danger" role="alert" style="text-align: center">
+                        ${alertMess}
+                    </div>
                     
                     <button>Add</button>
                     <button type="reset">Reset</button>
                 </form>
+
             </div>
         </div>
-        <script>
-            function addProductMessage() {
-                alert("Add product successful!");
-            }
-        </script>
     </body>
-</html>
+</html><

@@ -9,6 +9,7 @@ import DAO.DAOCategory;
 import DAO.DAOCustomer;
 import DAO.DAOOrder;
 import Entity.Category;
+import Entity.Contact;
 import Entity.Customer;
 import Entity.Order;
 import java.io.IOException;
@@ -81,8 +82,16 @@ public class managerOrderController extends HttpServlet {
             pageC = Integer.parseInt(pageCurrent);
 
         }
+        
+        String statusParam = request.getParameter("status");
+        int status = (statusParam != null && !statusParam.isEmpty()) ? Integer.parseInt(statusParam) : -1;
         ArrayList<Order> listOrder = new ArrayList<>();
-        listOrder = od.getListOrderWithPage(pageC, pagesize);
+        if (status == -1) {
+            listOrder = od.getListOrderWithPage(pageC, pagesize);
+        } else {
+            listOrder = od.getOrdersByStatus(status);
+        }
+        
         request.setAttribute("listC", listCategory);
         request.setAttribute("listO", listOrder);
         request.setAttribute("listCU", listCustomer);
@@ -100,8 +109,8 @@ public class managerOrderController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {String oidString = request.getParameter("oid");
-        String status = request.getParameter("status");
+    throws ServletException, IOException {
+        String oidString = request.getParameter("oid");
         DAOOrder od = new DAOOrder();
         Order o = new Order();
         ArrayList<Category> listCategory = new ArrayList<>();
@@ -109,14 +118,12 @@ public class managerOrderController extends HttpServlet {
         ArrayList<Order> listStatus = new ArrayList<>();
         ArrayList<Customer> listCustomer = new ArrayList<>();
         listOrder = od.getOrdersById(oidString);
-        listOrder = od.getOrdersByStatus(status);
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
         DAOCustomer cud = new DAOCustomer();
         listCustomer = cud.getCustomers();
         listOrder.add(o);
         request.setAttribute("searchMessage", oidString);
-        request.setAttribute("searchByStatus", status);
         request.setAttribute("listO", listOrder);
         request.setAttribute("listC", listCategory);
         request.setAttribute("listCU", listCustomer);

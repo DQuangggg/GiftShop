@@ -100,12 +100,23 @@
                     <b>Manager System</b> 
                     <div class="manager_search">
                         <form action="managerOrder" method="post">
-                                <div class="">
-                                <input id="search-byid" name="status" type="search" placeholder="Search order by id..." value="${searchByStatus}" />
+                            <div class="">
+                                <input id="search-byid" name="oid" type="number" placeholder="Search order by id..." value="${searchMessage}" />
                                 <button type="submit" class="button_searchbyid">
                                     Search
                                 </button>
                             </div>
+                        </form>
+
+                        <form style="float: right;" action="managerOrder" method="get">
+                            Status :
+                            <select name="status">
+                                <option value="-1">All</option>
+                                <option value="0">Wait</option>
+                                <option value="1">Process</option>
+                                <option value="2">Done</option>
+                            </select>
+                            <input type="submit" value="Filter">
                         </form>
                     </div>
                 </div>
@@ -125,11 +136,11 @@
                     <c:forEach items="${listO}" var="o">
                         <tr>
                             <th  scope="row" style="text-align: center">${o.orderid}</th>
-                     <c:forEach items="${listCU}" var="c">
-                        <c:if test="${o.custid == c.custid }">
-                            <td>${c.firstname} ${c.lastname}</td>
-                        </c:if>
-                     </c:forEach>
+                                <c:forEach items="${listCU}" var="c">
+                                    <c:if test="${o.custid == c.custid }">
+                                    <td>${c.firstname} ${c.lastname}</td>
+                                </c:if>
+                            </c:forEach>
                             <td>${o.orderDate}</td>
                             <c:if test="${o.status == 0}">
                                 <td>Wait</td>

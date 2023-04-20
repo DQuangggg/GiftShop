@@ -43,7 +43,7 @@
                     </select><br/>
                     
                     <button>Update</button>
-
+                    <button type="reset">Reset</button>
                 </form>
             </div>
         </div>

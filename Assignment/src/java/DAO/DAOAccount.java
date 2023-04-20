@@ -184,6 +184,29 @@ public class DAOAccount extends DBConnect {
         }
         return listAccount;
     }
+    
+        public ArrayList<Account> getAccountsByRole(int isAdmin) {
+        ArrayList<Account> listAccount = new ArrayList<>();
+        try {
+            String sqlquery = "Select aid,username,password,isAdmin From Account \n"
+                    + "Where isAdmin = ?";
+
+            PreparedStatement statement = connection.prepareStatement(sqlquery);
+            statement.setInt(1,isAdmin);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setAid(rs.getInt("aid"));
+                a.setUser(rs.getString("username"));
+                a.setPass(rs.getString("password"));
+                a.setIsAdmin(rs.getBoolean("isAdmin"));
+                listAccount.add(a);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listAccount;
+    }
 
     public int getTotalPage(int pagesize) {
         int totalPage = 0;
@@ -241,6 +264,6 @@ public class DAOAccount extends DBConnect {
 
     public static void main(String[] args) {
         DAOAccount dao = new DAOAccount();
-        System.out.println(dao.getAccountsByName(""));
+        System.out.println(dao.getAccountsByRole(1));
     }
 }

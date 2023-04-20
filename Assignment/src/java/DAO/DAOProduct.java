@@ -377,6 +377,7 @@ public class DAOProduct extends DBConnect {
         return totalPage;
     }
 
+        
     public ArrayList<Product> getProductSearchByNameWithPaging(String nameToSearch, int index, int pagesize) {
         ArrayList<Product> products = new ArrayList<>();
         try {
