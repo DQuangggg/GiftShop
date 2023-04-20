@@ -32,9 +32,6 @@ public abstract class DBConnect {
            Logger.getLogger(DBConnect.class.getName()).log(Level.SEVERE, null, ex);
        }
    }
-   
-    public static void main(String[] args) {
-        DBConnect db = new DBConnect() {};
-    }
+
    
 }
