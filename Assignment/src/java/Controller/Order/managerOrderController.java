@@ -19,6 +19,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -71,23 +72,23 @@ public class managerOrderController extends HttpServlet {
         listCustomer = cu.getCustomers();
         
 
-        int totalPage = 0;
-        int pagesize = 20;
-        totalPage = od.getTotalOrderPage(pagesize);
-        String pageCurrent = request.getParameter("page");
-        int pageC = 0;
-        if (pageCurrent == null) {
-            pageC = 1;
-        } else {
-            pageC = Integer.parseInt(pageCurrent);
+        int count = od.getTotalOrder();
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
 
+        int endPage = count / 15;
+        if (count % 15 != 0) {
+            endPage++;
         }
         
         String statusParam = request.getParameter("status");
         int status = (statusParam != null && !statusParam.isEmpty()) ? Integer.parseInt(statusParam) : -1;
-        ArrayList<Order> listOrder = new ArrayList<>();
+        List<Order> listOrder = new ArrayList<>();
         if (status == -1) {
-            listOrder = od.getListOrderWithPage(pageC, pagesize);
+            listOrder = od.pagingOrder(index);
         } else {
             listOrder = od.getOrdersByStatus(status);
         }
@@ -95,8 +96,8 @@ public class managerOrderController extends HttpServlet {
         request.setAttribute("listC", listCategory);
         request.setAttribute("listO", listOrder);
         request.setAttribute("listCU", listCustomer);
-        request.setAttribute("totalpage", totalPage);
-        request.setAttribute("pageCurrent", pageC);
+        request.setAttribute("tag", index);
+        request.setAttribute("endP", endPage);
         request.getRequestDispatcher("managerOrder.jsp").forward(request, response);
     } 
 

@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -64,35 +65,33 @@ public class managerContactController extends HttpServlet {
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
         DAOContact co = new DAOContact();
+        
+        int count = co.getTotalContact();
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
 
-        int totalPage = 0;
-        int pagesize = 12;
-        totalPage = co.getTotalContactPage(pagesize);
-        String pageCurrent = request.getParameter("page");
-        int pageC = 0;
-        if (pageCurrent == null) {
-            pageC = 1;
-        } else {
-            pageC = Integer.parseInt(pageCurrent);
-
+        int endPage = count / 15;
+        if (count % 15 != 0) {
+            endPage++;
         }
 
         String statusParam = request.getParameter("status");
         int status = (statusParam != null && !statusParam.isEmpty()) ? Integer.parseInt(statusParam) : -1;
-        ArrayList<Contact> listContact = new ArrayList<>();
+        List<Contact> listContact = new ArrayList<>();
         if (status == -1) {
-            listContact = co.getListContactWithPage(pageC, pagesize);
+            listContact = co.pagingContact(index);
         } else {
             listContact = co.getContactByStatus(status);
         }
 
-        //ArrayList<Contact> listContact = new ArrayList<>();
-        //listContact = co.getListContactWithPage(pageC, pagesize);
         request.setAttribute("status", status);
         request.setAttribute("listC", listCategory);
         request.setAttribute("listCO", listContact);
-        request.setAttribute("totalpage", totalPage);
-        request.setAttribute("pageCurrent", pageC);
+        request.setAttribute("tag", index);
+        request.setAttribute("endP", endPage);
         request.getRequestDispatcher("managerContact.jsp").forward(request, response);
     }
 

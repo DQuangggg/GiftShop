@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -223,9 +224,52 @@ public class DAOContact extends DBConnect {
         return listContact;
     }
 
+    public int getTotalContact() {
+        try {
+            String sql = "SELECT COUNT(*) From Contact";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+
+            }
+        } catch (SQLException ex) {
+
+        }
+        return 0;
+    }
+
+    public List<Contact> pagingContact(int index) {
+        List<Contact> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Contact ORDER BY contactid  OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, (index - 1) * 15);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Contact c = new Contact();
+                c.setContactid(rs.getInt("contactid"));
+                c.setFirstName(rs.getString("firstname"));
+                c.setLastName(rs.getString("lastname"));
+                c.setEmail(rs.getString("email"));
+                c.setPhone(rs.getString("phone"));
+                c.setMessage(rs.getString("message"));
+                c.setContactDate(rs.getString("contactdate"));
+                c.setStatus(rs.getInt("status"));
+                list.add(c);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+    
+    
     public static void main(String[] args) {
         DAOContact dao = new DAOContact();
-        System.out.println(dao.getContactById(""));
-        //dao.updateContact(new Contact(3, "", "", "", "", "", "", 1));
+        //.out.println(dao.getTotalContact());
+        List<Contact> list = dao.pagingContact(1);
+        for (Contact product : list) {
+            System.out.println(product);
+        }
     }
 }

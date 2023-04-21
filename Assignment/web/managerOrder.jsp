@@ -156,23 +156,15 @@
                     </c:forEach>
                 </table>
             </div>
-            <c:if test="${totalpage!=null}">                   
-                <div class="row">
-                    <div id="pagination">
-                        <span class="prev"><a title="" href="managerOrder?page=${pageCurrent-1>0?pageCurrent-1:"1"}">«
-                                Previous</a></span>
-                                <c:if test="${pageCurrent-1>0}">
-                            <span class=""><a title="" href="managerOrder?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
-                            </c:if>
-                            <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg">
-                            <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="managerOrder?page=${pg}">${pg}</a></span>
-                            </c:forEach>
-
-                        <span class="next"><a title="" href="managerOrder?page=${pageCurrent+1>totalpage?totalpage:pageCurrent+1}">Next
-                                »</a></span>
-                    </div>
+            <div class="row">    
+                <div id="pagination">
+                    <span class="prev"><a title="" href="managerOrder?index=${tag-1>0?tag-1:"1"}">« Previous</a></span>
+                    <c:forEach begin="1" end="${endP}" var="i">
+                        <span class=" ${i==tag?"current":""}"><a href="managerOrder?index=${i}">${i}</a></span>
+                    </c:forEach>
+                    <span class="next"><a title="" href="managerOrder?index=${tag+1>endP?endP:tag+1}">Next »</a></span>
                 </div>
-            </c:if>                                                          
+            </div>                                                                             
         </div>
         <div class="container-fluid ">
             <div class="row">

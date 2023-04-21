@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -92,7 +93,6 @@ public class DAOOrder extends DBConnect {
         }
         return listOrder;
     }
-
 
     public int getLastIdOfOrder() {
         int lastOrderId = 0;
@@ -221,7 +221,46 @@ public class DAOOrder extends DBConnect {
         }
     }
 
+    public int getTotalOrder() {
+        try {
+            String sql = "SELECT COUNT(*) From [Order]";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+
+            }
+        } catch (SQLException ex) {
+
+        }
+        return 0;
+    }
+
+    public List<Order> pagingOrder(int index) {
+        List<Order> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM [Order] ORDER BY orderid  OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, (index - 1) * 15);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Order o = new Order();
+                o.setOrderid(rs.getInt("orderid"));
+                o.setCustid(rs.getInt("custid"));
+                o.setOrderDate(rs.getDate("orderdate"));
+                list.add(o);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
     public static void main(String[] args) {
         DAOOrder dao = new DAOOrder();
+        //System.out.println(dao.getTotalOrder());
+        List<Order> list = dao.pagingOrder(1);
+        for (Order product : list) {
+            System.out.println(product);
+        }
     }
 }

@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -261,9 +262,48 @@ public class DAOAccount extends DBConnect {
         }
         return listAccount;
     }
+    
+    public int getTotalAccount() {
+        try {
+            String sql = "SELECT COUNT(*) From Account";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+
+            }
+        } catch (SQLException ex) {
+
+        }
+        return 0;
+    }
+
+    public List<Account> pagingCAccount(int index) {
+        List<Account> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Account ORDER BY aid  OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, (index - 1) * 15);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Account a = new Account();
+                a.setAid(rs.getInt("aid"));
+                a.setUser(rs.getString("username"));
+                a.setPass(rs.getString("password"));
+                a.setIsAdmin(rs.getBoolean("isAdmin"));
+                list.add(a);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         DAOAccount dao = new DAOAccount();
-        System.out.println(dao.getAccountsByRole(1));
+        //System.out.println(dao.getTotalAccount());
+        List<Account> list = dao.pagingCAccount(1);
+        for (Account product : list) {
+            System.out.println(product);
+        }
     }
 }

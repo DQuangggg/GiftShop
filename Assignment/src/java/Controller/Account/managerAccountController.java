@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -55,29 +56,30 @@ public class managerAccountController extends HttpServlet {
 
         DAOAccount ad = new DAOAccount();
 
-        int totalPage = 0;
-        int pagesize = 10;
-        totalPage = ad.getTotalPage(pagesize);
-        String pageCurrent = request.getParameter("page");
-        int pageC = 0;
-        if (pageCurrent == null) {
-            pageC = 1;
-        } else {
-            pageC = Integer.parseInt(pageCurrent);
+        int count = ad.getTotalAccount();
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
+        }
+        int index = Integer.parseInt(indexPage);
+
+        int endPage = count / 15;
+        if (count % 15 != 0) {
+            endPage++;
         }
 
         String statusParam = request.getParameter("role");
         int role = (statusParam != null && !statusParam.isEmpty()) ? Integer.parseInt(statusParam) : -1;
-        ArrayList<Account> accounts = new ArrayList<>();
+        List<Account> accounts = new ArrayList<>();
         if (role == -1) {
-            accounts = ad.getListAccountsWithPage(pageC, pagesize);
+            accounts = ad.pagingCAccount(index);
         } else {
             accounts = ad.getAccountsByRole(role);
         }
 
 
-        request.setAttribute("totalpage", totalPage);
-        request.setAttribute("pageCurrent", pageC);
+        request.setAttribute("tag", index);
+        request.setAttribute("endP", endPage);
         request.setAttribute("listA", accounts);
         request.setAttribute("listC", listCategory);
 
