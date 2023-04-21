@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -377,7 +378,6 @@ public class DAOProduct extends DBConnect {
         return totalPage;
     }
 
-        
     public ArrayList<Product> getProductSearchByNameWithPaging(String nameToSearch, int index, int pagesize) {
         ArrayList<Product> products = new ArrayList<>();
         try {
@@ -416,9 +416,53 @@ public class DAOProduct extends DBConnect {
         }
         return products;
     }
+    
+    
+    //NEW
+
+    public int getTotalProduct() {
+        try {
+            String sql = "SELECT COUNT(*) From Product";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+
+            }
+        } catch (SQLException ex) {
+
+        }
+        return 0;
+    }
+    
+    public List<Product> pagingProduct(int index){
+        List<Product> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Product ORDER BY pid  OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, (index-1)*15);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {                
+                Product p = new Product();
+                p.setPid(rs.getInt("pid"));
+                p.setProductName(rs.getString("productname"));
+                p.setProductImg(rs.getString("productimg"));
+                p.setProductPrice(rs.getInt("productprice"));
+                p.setProductNote(rs.getString("productnote"));
+                p.setCid(rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
     public static void main(String[] args) {
         DAOProduct dao = new DAOProduct();
-        System.out.println(dao.getProductById(1));
+        List<Product> list = dao.pagingProduct(6);
+        for (Product product : list) {
+            System.out.println(product);
+        }
+        //System.out.println(dao.pagingProduct(1));
     }
 }

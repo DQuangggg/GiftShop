@@ -64,8 +64,8 @@
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
                                 <a href="managerController" id="customer_manager_link">Manager</a>
-                                </c:when>
-                            </c:choose>
+                            </c:when>
+                        </c:choose>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
                                 </li>
                                 <li style="width: 100%; float: none; "><a style="width: auto; float: none;" href="managerAccount">Manager Account</a>
                                 </li>
-                                
+
                                 <li style="width: 100%; float: none; "><a style="width: auto; float: none;" href="managerOrder">Manager Order</a>
                                 </li>
                                 <li style="width: 100%; float: none; "><a style="width: auto; float: none;" href="managerContact">Manager Contact</a>
@@ -111,7 +111,7 @@
                     <a href="addProductController">Add Product</a>
                 </div>
             </div>
-                                
+
             <div class="managet_product">
                 <table class="table bordered 3px ">
                     <thead >
@@ -144,26 +144,18 @@
                     </c:forEach>
                 </table>
             </div>
-                                
-            <c:if test="${totalpage!=null}">  
-                <div class="row">
-                    <div id="pagination">
-                        <span class="prev"><a title="" href="managerController?page=${pageCurrent-1>0?pageCurrent-1:"1"}">«
-                                Previous</a></span>
-                                <c:if test="${pageCurrent-1>0}">
-                                <span class=""><a title="" href="managerController?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
-                            </c:if>
-                            <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg">
-                                <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="managerController?page=${pg}">${pg}</a></span>
-                            </c:forEach>
 
-                        <span class="next"><a title="" href="managerController?page=${pageCurrent+1>totalpage?totalpage:pageCurrent+1}">Next
-                                »</a></span>
-                    </div>
-                </c:if> 
+            <div class="row">    
+                <div id="pagination">
+                    <span class="prev"><a title="" href="managerController?index=${tag-1>0?tag-1:"1"}">« Previous</a></span>
+                    <c:forEach begin="1" end="${endP}" var="i">
+                        <span class=" ${i==tag?"current":""}"><a href="managerController?index=${i}">${i}</a></span>
+                    </c:forEach>
+                    <span class="next"><a title="" href="managerController?index=${tag+1>endP?endP:tag+1}">Next »</a></span>
+                </div>
             </div>
         </div>
-                                
+
         <div class="container-fluid ">
             <div class="row">
             </div>
@@ -188,9 +180,9 @@
                 <div class="col-md-3  custom_footer custom_footer3">
                     <h3>Information</h3>
                     <ul class="list">
-                        
+
                         <li class="lastItem"><a title="" href="/cart">My cart</a></li>
-                        
+
                         <c:if test="${sessionScope.acc!=null}">
                             <li class=""><a title="" href="changePassword">Change Password</a></li>
                             </c:if>
