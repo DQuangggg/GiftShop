@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -63,18 +64,32 @@ public class searchProductController extends HttpServlet {
         String nameSearch = request.getParameter("q");
         DAOProduct pd = new DAOProduct();
 
-        int totalPage = 0;
-        int pagesize = 12;
-        String pageCurrent = request.getParameter("page");
-        int pageC = 0;
-        if (pageCurrent == null) {
-            pageC = 1;
-        } else {
-            pageC = Integer.parseInt(pageCurrent);
+//        int totalPage = 0;
+//        int pagesize = 12;
+//        String pageCurrent = request.getParameter("page");
+//        int pageC = 0;
+//        if (pageCurrent == null) {
+//            pageC = 1;
+//        } else {
+//            pageC = Integer.parseInt(pageCurrent);
+//        }
+//        totalPage = pd.getTotalPageSreachByName(nameSearch, pagesize);
+//        ArrayList<Product> products = new ArrayList<>();
+//        products = pd.getProductSearchByNameWithPaging(nameSearch, pageC, pagesize);
+        int count = pd.getTotalProductBySearch(nameSearch);
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
         }
-        totalPage = pd.getTotalPageSreachByName(nameSearch, pagesize);
-        ArrayList<Product> products = new ArrayList<>();
-        products = pd.getProductSearchByNameWithPaging(nameSearch, pageC, pagesize);
+        int index = Integer.parseInt(indexPage);
+
+        int endPage = count / 15;
+        if (count % 15 != 0) {
+            endPage++;
+        }
+        List<Product> products = new ArrayList<>();
+        products = pd.pagingProdctBySearch(nameSearch, index);
+
         if (products.isEmpty() == false) {
             boolean issearch = true;
             ArrayList<Category> listCategory = new ArrayList<>();
@@ -85,8 +100,10 @@ public class searchProductController extends HttpServlet {
 
             request.setAttribute("issearch", issearch);
             request.setAttribute("textsearch", nameSearch);
-            request.setAttribute("totalpage", totalPage);
-            request.setAttribute("pageCurrent", pageC);
+            request.setAttribute("tag", index);
+            request.setAttribute("endP", endPage);
+//            request.setAttribute("totalpage", totalPage);
+//            request.setAttribute("pageCurrent", pageC);
 
             request.getRequestDispatcher("shop.jsp").forward(request, response);
         } else {

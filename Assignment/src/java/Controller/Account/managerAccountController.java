@@ -54,7 +54,6 @@ public class managerAccountController extends HttpServlet {
         DAOCategory cd = new DAOCategory();
         ArrayList<Category> listCategory = new ArrayList<>();
         listCategory = cd.getCategory();
-        request.setAttribute("listC", listCategory);
 
         DAOAccount ad = new DAOAccount();
 
@@ -70,9 +69,11 @@ public class managerAccountController extends HttpServlet {
             endPage++;
         }
 
+        //filter by role
         String statusParam = request.getParameter("role");
         int role = (statusParam != null && !statusParam.isEmpty()) ? Integer.parseInt(statusParam) : -1;
         List<Account> accounts = new ArrayList<>();
+        //all role
         if (role == -1) {
             accounts = ad.pagingCAccount(index);
         } else {
@@ -81,6 +82,7 @@ public class managerAccountController extends HttpServlet {
 
         request.setAttribute("tag", index);
         request.setAttribute("endP", endPage);
+        request.setAttribute("listC", listCategory);
         request.setAttribute("listA", accounts);
         request.getRequestDispatcher("managerAccount.jsp").forward(request, response);
     }
@@ -108,7 +110,7 @@ public class managerAccountController extends HttpServlet {
 
         Account a = new Account();
         listAccount.add(a);
-        
+
         request.setAttribute("searchMessage", aidString);
         request.setAttribute("listA", listAccount);
         request.getRequestDispatcher("managerAccount.jsp").forward(request, response);

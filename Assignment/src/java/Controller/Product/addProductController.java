@@ -61,6 +61,7 @@ public class addProductController extends HttpServlet {
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
+        
         request.setAttribute("listC", listCategory);
         request.getRequestDispatcher("addProduct.jsp").forward(request, response);
     } 
@@ -89,8 +90,10 @@ public class addProductController extends HttpServlet {
         p.setProductPrice(pPrice);
         p.setProductNote(productNote);
         p.setCid(cId);
+        
         DAOProduct pd = new DAOProduct();
         pd.insertProduct(p);
+        
         response.sendRedirect("managerController");
     }
 

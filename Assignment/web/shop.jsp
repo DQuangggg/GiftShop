@@ -216,21 +216,60 @@
                 </c:choose>
             </div>
 
-            <div class="row">      
-                <div id="pagination">
-                    <span class="prev"><a title="" href="shopController?page=${pageCurrent-1>0?pageCurrent-1:"1"}">« Previous</a>
-                    </span>
-                    <c:if test="${pageCurrent-1>0}">
-                        <span class=""><a title="" href="shopController?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
-                        </c:if>
+            <div class="row">    
+                <c:choose>
+                    <c:when test="${issearch==true}">
+                        <div id="pagination">
+                            <span class="prev"><a title="" href="searchProductController?q=${textsearch}&index=${tag-1>0?tag-1:"1"}">« Previous</a></span>
+                            <c:forEach begin="1" end="${endP}" var="i">
+                                <span class=" ${i==tag?"current":""}"><a href="searchProductController?q=${textsearch}?index=${i}">${i}</a></span>
+                                </c:forEach>
+                            <span class="next"><a title="" href="searchProductController?q=${textsearch}?index=${tag+1>endP?endP:tag+1}">Next »</a></span>
+                        </div>
+                    </c:when>
 
-                    <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg"> 
-                        <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="shopController?page=${pg}">${pg}</a></span>
-                        </c:forEach>
+                    <c:when test="${iscategory==true }">
+                        <div id="pagination">
+                            <span class="prev"><a title="" href="categoryController?cid=${cid}?index=${tag-1>0?tag-1:"1"}">« Previous</a></span>
+                            <c:forEach begin="1" end="${endP}" var="i">
+                                <span class=" ${i==tag?"current":""}"><a href="categoryController?cid=${cid}?index=${i}">${i}</a></span>
+                                </c:forEach>
+                            <span class="next"><a title="" href="categoryController?cid=${cid}?index=${tag+1>endP?endP:tag+1}">Next »</a></span>
+                        </div>
+                    </c:when>
 
-                    <span class="next"><a title="" href="shopController?page=${pageCurrent+4>totalpage?totalpage:pageCurrent+4}">Next »</a></span>
-                </div>
+                    <c:otherwise>
+                        <div id="pagination">
+                            <span class="prev"><a title="" href="shopController?index=${tag-1>0?tag-1:"1"}">« Previous</a></span>
+                            <c:forEach begin="1" end="${endP}" var="i">
+                                <span class=" ${i==tag?"current":""}"><a href="shopController?index=${i}">${i}</a></span>
+                                </c:forEach>
+                            <span class="next"><a title="" href="shopController?index=${tag+1>endP?endP:tag+1}">Next »</a></span>
+                        </div>
+                    </c:otherwise>
+                </c:choose>
+
+
+
+
             </div>
+
+
+            <!--            <div class="row">      
+                            <div id="pagination">
+                                <span class="prev"><a title="" href="shopController?page=${pageCurrent-1>0?pageCurrent-1:"1"}">« Previous</a>
+                                </span>
+            <c:if test="${pageCurrent-1>0}">
+                <span class=""><a title="" href="shopController?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
+            </c:if>
+
+            <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg"> 
+                <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="shopController?page=${pg}">${pg}</a></span>
+            </c:forEach>
+
+        <span class="next"><a title="" href="shopController?page=${pageCurrent+4>totalpage?totalpage:pageCurrent+4}">Next »</a></span>
+    </div>
+</div>-->
         </div>
     </div>
 

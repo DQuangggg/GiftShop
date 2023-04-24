@@ -107,6 +107,7 @@ public class checkOutController extends HttpServlet {
         String address = request.getParameter("checkoutAddress");
         String city = request.getParameter("checkoutCity");
         String phone = request.getParameter("checkoutPhone");
+        
         Customer cust = new Customer();
         cust.setFirstname(firstname);
         cust.setLastname(lastname);

@@ -258,7 +258,7 @@ public class DAOOrder extends DBConnect {
     public static void main(String[] args) {
         DAOOrder dao = new DAOOrder();
         //System.out.println(dao.getTotalOrder());
-        List<Order> list = dao.pagingOrder(1);
+        List<Order> list = dao.pagingOrder(0);
         for (Order product : list) {
             System.out.println(product);
         }

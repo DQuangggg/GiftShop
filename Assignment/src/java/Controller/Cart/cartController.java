@@ -50,48 +50,49 @@ public class cartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-
-        String pidString = request.getParameter("pid");
-        int pid = Integer.parseInt(pidString);
-        DAOProduct pd = new DAOProduct();
-        Product p = pd.getProductById(pid);
-        int amount = 1;
-
-        DAOCart cartDAO = new DAOCart();
-        DAOOrder od = new DAOOrder();
-        int cartId = od.getLastIdOfOrder() + 1;
-
-        Cart c = new Cart();
-        c.setCartid(cartId);
-        c.setAmount(amount);
-        c.setProduct(p);
-
-        // check listcart on session null or not 
-        if (session.getAttribute("listcart") != null) {
-            ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listcart");
-            boolean sameProduct = false;
-            for (Cart cart : listCart) {
-                //check new product exist in listcart or not
-                if (cart.getProduct().getPid() == pid) {
-                    cart.setAmount(cart.getAmount() + 1);
-                    sameProduct = true;
-                }
-            }
-            if (!sameProduct) {
-                listCart.add(c);
-            }
-            session.setAttribute("listcart", listCart);
-            session.setAttribute("number", listCart.size());
-            response.sendRedirect("showCartController");
-        } else {
-            ArrayList<Cart> listCart = new ArrayList<>();
-            listCart.add(c);
-            session.setAttribute("listcart", listCart);
-            session.setAttribute("number", listCart.size());
-            response.sendRedirect("showCartController");
-
-        }
+         processRequest(request, response);
+//        HttpSession session = request.getSession();
+//
+//        String pidString = request.getParameter("pid");
+//        int pid = Integer.parseInt(pidString);
+//        DAOProduct pd = new DAOProduct();
+//        Product p = pd.getProductById(pid);
+//        int amount = 1;
+//
+//        DAOCart cartDAO = new DAOCart();
+//        DAOOrder od = new DAOOrder();
+//        int cartId = od.getLastIdOfOrder() + 1;
+//
+//        Cart c = new Cart();
+//        c.setCartid(cartId);
+//        c.setAmount(amount);
+//        c.setProduct(p);
+//
+//        // check listcart on session null or not 
+//        if (session.getAttribute("listcart") != null) {
+//            ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listcart");
+//            boolean sameProduct = false;
+//            for (Cart cart : listCart) {
+//                //check new product exist in listcart or not
+//                if (cart.getProduct().getPid() == pid) {
+//                    cart.setAmount(cart.getAmount() + 1);
+//                    sameProduct = true;
+//                }
+//            }
+//            if (!sameProduct) {
+//                listCart.add(c);
+//            }
+//            session.setAttribute("listcart", listCart);
+//            session.setAttribute("number", listCart.size());
+//            response.sendRedirect("showCartController");
+//        } else {
+//            ArrayList<Cart> listCart = new ArrayList<>();
+//            listCart.add(c);
+//            session.setAttribute("listcart", listCart);
+//            session.setAttribute("number", listCart.size());
+//            response.sendRedirect("showCartController");
+//
+//        }
     }
 
     /**
@@ -105,6 +106,7 @@ public class cartController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+       
         HttpSession session = request.getSession();
         String pidString = request.getParameter("pid");
         int pid = Integer.parseInt(pidString);

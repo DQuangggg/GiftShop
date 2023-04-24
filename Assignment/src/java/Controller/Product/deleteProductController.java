@@ -56,7 +56,9 @@ public class deleteProductController extends HttpServlet {
     throws ServletException, IOException {
         String id = request.getParameter("pid");
         DAOProduct pd = new DAOProduct();
+        
         pd.deleteProduct(id);
+        
         response.sendRedirect("managerController");
     } 
 

@@ -61,9 +61,13 @@ public class managerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Category> listCategory = new ArrayList<>();
+        DAOCategory cd = new DAOCategory();
+        listCategory = cd.getCategory();
+
         ArrayList<Product> products = new ArrayList<>();
         DAOProduct pd = new DAOProduct();
-     
+
         int count = pd.getTotalProduct();
         String indexPage = request.getParameter("index");
         if (indexPage == null) {
@@ -77,12 +81,9 @@ public class managerController extends HttpServlet {
         }
         List<Product> list = pd.pagingProduct(index);
 
-        ArrayList<Category> listCategory = new ArrayList<>();
-        DAOCategory cd = new DAOCategory();
-        listCategory = cd.getCategory();
-        request.setAttribute("listC", listCategory);
         request.setAttribute("tag", index);
         request.setAttribute("endP", endPage);
+        request.setAttribute("listC", listCategory);
         request.setAttribute("listP", list);
         request.getRequestDispatcher("manager.jsp").forward(request, response);
     }
@@ -98,18 +99,21 @@ public class managerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Category> listCategory = new ArrayList<>();
+        DAOCategory cd = new DAOCategory();
+        listCategory = cd.getCategory();
+
         String pidString = request.getParameter("pid");
         int pid = Integer.parseInt(pidString);
         DAOProduct pd = new DAOProduct();
         Product p = new Product();
+        
         p = pd.getProductById(pid);
-        ArrayList<Category> listCategory = new ArrayList<>();
-        DAOCategory cd = new DAOCategory();
-        listCategory = cd.getCategory();
         //if found product
         if (p != null) {
             ArrayList<Product> products = new ArrayList<>();
             products.add(p);
+            
             request.setAttribute("searchMessage", pid);
             request.setAttribute("listP", products);
             request.setAttribute("listC", listCategory);

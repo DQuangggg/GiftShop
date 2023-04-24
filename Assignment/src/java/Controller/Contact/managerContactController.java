@@ -64,9 +64,9 @@ public class managerContactController extends HttpServlet {
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
-        
+
         DAOContact co = new DAOContact();
-        
+
         int count = co.getTotalContact();
         String indexPage = request.getParameter("index");
         if (indexPage == null) {
@@ -107,13 +107,14 @@ public class managerContactController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Category> listCategory = new ArrayList<>();
+        DAOCategory cd = new DAOCategory();
+        listCategory = cd.getCategory();
+
         String coidString = request.getParameter("coid");
         DAOContact od = new DAOContact();
         ArrayList<Contact> listContact = new ArrayList<>();
         listContact = od.getContactById(coidString);
-        ArrayList<Category> listCategory = new ArrayList<>();
-        DAOCategory cd = new DAOCategory();
-        listCategory = cd.getCategory();
         Contact co = new Contact();
         listContact.add(co);
         request.setAttribute("searchMessage", coidString);

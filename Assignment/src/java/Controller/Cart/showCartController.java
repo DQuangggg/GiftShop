@@ -51,6 +51,7 @@ public class showCartController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+
         ArrayList<Product> productsBest = new ArrayList<>();
         DAOProduct pd = new DAOProduct();
         productsBest = pd.get8BestSell();
@@ -59,6 +60,7 @@ public class showCartController extends HttpServlet {
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
+        request.setAttribute("listC", listCategory);
 
         int numProducts = 0;
 
@@ -69,6 +71,9 @@ public class showCartController extends HttpServlet {
             double total = 0;
             for (Cart cart : listCart) {
                 total = total + cart.getAmount() * cart.getProduct().getProductPrice();
+                if (cart.getAmount() == 0) {
+                    session.removeAttribute("listcart");
+                }
                 numProducts += cart.getAmount();
                 request.setAttribute("numProducts", numProducts);
             }
@@ -83,7 +88,6 @@ public class showCartController extends HttpServlet {
                 request.setAttribute("subtotalMess", subtotalMess);
                 request.setAttribute("discount", discount + "$");
                 request.setAttribute("subtotal", subtotal + "$");
-                request.setAttribute("listC", listCategory);
                 request.getRequestDispatcher("cart.jsp").forward(request, response);
             } else {
                 String discountMess = "Discount";
@@ -91,7 +95,6 @@ public class showCartController extends HttpServlet {
                 request.setAttribute("discountMess", discountMess);
                 request.setAttribute("subtotalMess", subtotalMess);
                 request.setAttribute("subtotal", total + "$");
-                request.setAttribute("listC", listCategory);
                 request.getRequestDispatcher("cart.jsp").forward(request, response);
             }
         } else {
@@ -100,7 +103,6 @@ public class showCartController extends HttpServlet {
             request.setAttribute("numProducts", 0);
             request.setAttribute("discountMess", discountMess);
             request.setAttribute("subtotalMess", subtotalMess);
-            request.setAttribute("listC", listCategory);;
             request.getRequestDispatcher("cart.jsp").forward(request, response);
 
         }

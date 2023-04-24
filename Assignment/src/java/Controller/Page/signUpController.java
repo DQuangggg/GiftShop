@@ -72,8 +72,10 @@ public class signUpController extends HttpServlet {
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
         String repass = request.getParameter("repassword");
+        
         DAOAccount ac = new DAOAccount();
         Account a = ac.checkAccountsExist(user);
+        
         if (pass.equals(repass) == false) {
             request.setAttribute("alertMess", "Password and Repassword must be the same");
             request.getRequestDispatcher("signup.jsp").forward(request, response);

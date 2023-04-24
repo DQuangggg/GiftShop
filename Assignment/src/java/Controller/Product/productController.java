@@ -7,6 +7,7 @@ package Controller.Product;
 
 import DAO.DAOCategory;
 import DAO.DAOProduct;
+import Entity.Cart;
 import Entity.Category;
 import Entity.Product;
 import java.io.IOException;
@@ -15,6 +16,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
@@ -58,6 +60,10 @@ public class productController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+                ArrayList<Category> listCategory = new ArrayList<>();
+        DAOCategory cd = new DAOCategory();
+        listCategory = cd.getCategory();
+        
         String pidString = request.getParameter("pid");
         int pid = Integer.parseInt(pidString);
         DAOProduct pd = new DAOProduct();
@@ -66,13 +72,21 @@ public class productController extends HttpServlet {
         
         ArrayList<Product> productsNew = new ArrayList<>();
         productsNew = pd.get8NewProducts();
-        
-        ArrayList<Category> listCategory = new ArrayList<>();
-        DAOCategory cd = new DAOCategory();
-        listCategory = cd.getCategory();
-        
+       
         ArrayList<Product> productsBest = new ArrayList<>();
         productsBest = pd.get8BestSell();
+        
+        HttpSession session = request.getSession();
+        if (session.getAttribute("listcart") != null) {
+            ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listcart");
+            int numProducts = 0;
+            for (Cart cart : listCart) {
+                numProducts += cart.getAmount();
+            }
+            request.setAttribute("numProducts", numProducts);
+        } else {
+            request.setAttribute("numProducts", 0);
+        }
         
         request.setAttribute("listB", productsBest);
         request.setAttribute("listC", listCategory);

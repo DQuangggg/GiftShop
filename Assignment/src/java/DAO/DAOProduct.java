@@ -313,6 +313,82 @@ public class DAOProduct extends DBConnect {
         }
         return totalPage;
     }
+   
+
+    public int getTotalProductByCategory(int cid) {
+        try {
+            String sql = "SELECT COUNT(*) FROM Product Where cid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, cid);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<Product> pagingProdctByCategory(int cid, int index) {
+        List<Product> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Product WHERE cid = ? ORDER BY pid OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(2, (index - 1) * 15);
+            statement.setInt(1, cid);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setPid(rs.getInt("pid"));
+                p.setProductName(rs.getString("productname"));
+                p.setProductImg(rs.getString("productimg"));
+                p.setProductPrice(rs.getInt("productprice"));
+                p.setProductNote(rs.getString("productnote"));
+                p.setCid(rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
+
+    public int getTotalProductBySearch(String nameToSearch) {
+        try {
+            String sql = "SELECT COUNT(*) FROM Product Where productname like ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, "%" + nameToSearch + "%");
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (Exception e) {
+        }
+        return 0;
+    }
+
+    public List<Product> pagingProdctBySearch(String nameToSearch, int index) {
+        List<Product> list = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM Product WHERE productname like ? ORDER BY pid OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY ";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(2, (index - 1) * 15);
+            statement.setString(1, nameToSearch);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Product p = new Product();
+                p.setPid(rs.getInt("pid"));
+                p.setProductName(rs.getString("productname"));
+                p.setProductImg(rs.getString("productimg"));
+                p.setProductPrice(rs.getInt("productprice"));
+                p.setProductNote(rs.getString("productnote"));
+                p.setCid(rs.getInt("cid"));
+                list.add(p);
+            }
+        } catch (Exception e) {
+        }
+        return list;
+    }
 
     public ArrayList<Product> getProductByCategoryWithPaging(int cid, int index, int pagesize) {
         ArrayList<Product> products = new ArrayList<>();
@@ -416,10 +492,8 @@ public class DAOProduct extends DBConnect {
         }
         return products;
     }
-    
-    
-    //NEW
 
+    //NEW
     public int getTotalProduct() {
         try {
             String sql = "SELECT COUNT(*) From Product";
@@ -434,15 +508,15 @@ public class DAOProduct extends DBConnect {
         }
         return 0;
     }
-    
-    public List<Product> pagingProduct(int index){
+
+    public List<Product> pagingProduct(int index) {
         List<Product> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM Product ORDER BY pid  OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY";
+            String sql = "SELECT * FROM Product ORDER BY pid  OFFSET ? ROWS FETCH NEXT 16 ROWS ONLY";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, (index-1)*15);
+            statement.setInt(1, (index - 1) * 16);
             ResultSet rs = statement.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
                 Product p = new Product();
                 p.setPid(rs.getInt("pid"));
                 p.setProductName(rs.getString("productname"));
@@ -456,14 +530,13 @@ public class DAOProduct extends DBConnect {
         }
         return list;
     }
-    
 
     public static void main(String[] args) {
         DAOProduct dao = new DAOProduct();
-        List<Product> list = dao.pagingProduct(6);
+        List<Product> list = dao.pagingProdctBySearch("Man", 0);
         for (Product product : list) {
             System.out.println(product);
         }
-        //System.out.println(dao.pagingProduct(1));
+        //System.out.println(dao.getTotalProductBySearch("Man"));
     }
 }

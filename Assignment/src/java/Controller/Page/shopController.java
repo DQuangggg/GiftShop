@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package Controller.Page;
 
 import DAO.DAOCategory;
@@ -25,34 +24,37 @@ import java.util.List;
  * @author ADMIN
  */
 public class shopController extends HttpServlet {
-   
-    /** 
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet shopController</title>");  
+            out.println("<title>Servlet shopController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet shopController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet shopController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
-    } 
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /** 
+    /**
      * Handles the HTTP <code>GET</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -60,14 +62,11 @@ public class shopController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
-       DAOProduct pd = new DAOProduct();
-        ArrayList<Product> products = new ArrayList<>();
-         
+            throws ServletException, IOException {
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
-        listCategory =  cd.getCategory();
-        
+        listCategory = cd.getCategory();
+
         //count product in cart
         HttpSession session = request.getSession();
         if (session.getAttribute("listcart") != null) {
@@ -80,28 +79,34 @@ public class shopController extends HttpServlet {
         } else {
             request.setAttribute("numProducts", 0);
         }
-        
-        int totalPage = 0;
-        int pagesize = 20;
-        totalPage = pd.getTotalPage(pagesize);
-        String pageCurrent = request.getParameter("page");
-        int pageC = 0;
-        if (pageCurrent == null) {
-            pageC=1;
-        } else {
-             pageC = Integer.parseInt(pageCurrent);
+
+        DAOProduct pd = new DAOProduct();
+
+        int count = pd.getTotalProduct();
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
         }
-        products = pd.getProductWithPaging(pageC, pagesize);
+        int index = Integer.parseInt(indexPage);
+
+        int endPage = count / 15;
+        if (count % 15 != 0) {
+            endPage++;
+        }
+
+        List<Product> products = new ArrayList<>();
+        products = pd.pagingProduct(index);
         
-        request.setAttribute("totalpage", totalPage);
-        request.setAttribute("pageCurrent", pageC);
+        request.setAttribute("tag", index);
+        request.setAttribute("endP", endPage);
         request.setAttribute("listP", products);
         request.setAttribute("listC", listCategory);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
-    } 
+    }
 
-    /** 
+    /**
      * Handles the HTTP <code>POST</code> method.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -109,12 +114,13 @@ public class shopController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    throws ServletException, IOException {
+            throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /** 
+    /**
      * Returns a short description of the servlet.
+     *
      * @return a String containing servlet description
      */
     @Override
