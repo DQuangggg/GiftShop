@@ -57,14 +57,14 @@
                                 <a href="login.jsp" id="customer_login_link">Log in</a>
                                 <a href="signup.jsp" id="customer_register_link">SIGN UP & SAVE 10%</a>
 
-                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
+                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart (${numProducts})</b><span class="cart-items"></span></a>
                                 </c:when>
 
                             <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
 
-                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
+                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart (${numProducts})</b><span class="cart-items"></span></a>
                                 </c:when>
 
                             <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">

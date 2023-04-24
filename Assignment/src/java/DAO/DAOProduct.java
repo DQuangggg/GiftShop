@@ -456,6 +456,7 @@ public class DAOProduct extends DBConnect {
         }
         return list;
     }
+    
 
     public static void main(String[] args) {
         DAOProduct dao = new DAOProduct();

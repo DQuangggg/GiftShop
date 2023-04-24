@@ -5,6 +5,7 @@
 package Controller.Page;
 
 import DAO.DAOCategory;
+import Entity.Cart;
 import Entity.Category;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 
 /**
@@ -62,6 +64,20 @@ public class aboutUsController extends HttpServlet {
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
         request.setAttribute("listC", listCategory);
+        
+        //count product in cart
+        HttpSession session = request.getSession();
+        if (session.getAttribute("listcart") != null) {
+            ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listcart");
+            int numProducts = 0;
+            for (Cart cart : listCart) {
+                numProducts += cart.getAmount();
+            }
+            request.setAttribute("numProducts", numProducts);
+        } else {
+            request.setAttribute("numProducts", 0);
+        }
+         
         request.getRequestDispatcher("aboutus.jsp").forward(request, response);
 
     }

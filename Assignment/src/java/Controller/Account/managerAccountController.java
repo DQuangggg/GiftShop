@@ -50,9 +50,11 @@ public class managerAccountController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        //List Category
         DAOCategory cd = new DAOCategory();
         ArrayList<Category> listCategory = new ArrayList<>();
         listCategory = cd.getCategory();
+        request.setAttribute("listC", listCategory);
 
         DAOAccount ad = new DAOAccount();
 
@@ -77,12 +79,9 @@ public class managerAccountController extends HttpServlet {
             accounts = ad.getAccountsByRole(role);
         }
 
-
         request.setAttribute("tag", index);
         request.setAttribute("endP", endPage);
         request.setAttribute("listA", accounts);
-        request.setAttribute("listC", listCategory);
-
         request.getRequestDispatcher("managerAccount.jsp").forward(request, response);
     }
 
@@ -97,19 +96,21 @@ public class managerAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        ArrayList<Category> listCategory = new ArrayList<>();
+        DAOCategory cd = new DAOCategory();
+        listCategory = cd.getCategory();
+        request.setAttribute("listC", listCategory);
+
         String aidString = request.getParameter("aid");
         DAOAccount ad = new DAOAccount();
         ArrayList<Account> listAccount = new ArrayList<>();
         listAccount = ad.getAccountsByName(aidString);
 
         Account a = new Account();
-        ArrayList<Category> listCategory = new ArrayList<>();
-        DAOCategory cd = new DAOCategory();
-        listCategory = cd.getCategory();
         listAccount.add(a);
+        
         request.setAttribute("searchMessage", aidString);
         request.setAttribute("listA", listAccount);
-        request.setAttribute("listC", listCategory);
         request.getRequestDispatcher("managerAccount.jsp").forward(request, response);
     }
 

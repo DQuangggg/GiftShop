@@ -58,8 +58,10 @@ public class checkOutController extends HttpServlet {
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
-
+        int numProducts = 0;
+        
         if (session.getAttribute("listcart") == null) {
+            request.setAttribute("numProducts", 0);
             response.sendRedirect("showCartController");
         } else {
             ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listcart");
@@ -67,6 +69,8 @@ public class checkOutController extends HttpServlet {
             double total = 0;
             for (Cart cart : listCart) {
                 total = total + cart.getAmount() * cart.getProduct().getProductPrice();
+                numProducts += cart.getAmount();
+                request.setAttribute("numProducts", numProducts);
             }
             //if user login
             if (session.getAttribute("acc") != null) {

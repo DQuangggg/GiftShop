@@ -56,7 +56,7 @@ public class addAccountController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-       String user = request.getParameter("username");
+        String user = request.getParameter("username");
         String pass = request.getParameter("password");
         String admin = request.getParameter("isAdmin");
         boolean isadmin = Boolean.parseBoolean(admin);

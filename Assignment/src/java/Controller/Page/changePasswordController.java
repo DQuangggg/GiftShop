@@ -63,9 +63,11 @@ public class changePasswordController extends HttpServlet {
         ArrayList<Product> productsBest = new ArrayList<>();
         DAOProduct pd = new DAOProduct();
         productsBest = pd.get8BestSell();
+        
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
+        
         request.setAttribute("listB", productsBest);
         request.setAttribute("listC", listCategory);
 
@@ -99,12 +101,13 @@ public class changePasswordController extends HttpServlet {
             
             request.setAttribute("listB", productsBest);
             request.setAttribute("listC", listCategory);
-            request.setAttribute("alertMess", "Wrong user or password!");
+            request.setAttribute("alertMess", "Wrong password!");
             request.getRequestDispatcher("changePassword.jsp").forward(request, response);
         } else if (newPass.equals(confrimPass) == false) {
             ArrayList<Product> productsBest = new ArrayList<>();
             DAOProduct pd = new DAOProduct();
             productsBest = pd.get8BestSell();
+            
             ArrayList<Category> listCategory = new ArrayList<>();
             DAOCategory cd = new DAOCategory();
             listCategory = cd.getCategory();

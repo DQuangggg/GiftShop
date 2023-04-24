@@ -50,13 +50,13 @@
                             <c:when test="${sessionScope.acc==null}">
                                 <a href="login.jsp" id="customer_login_link">Log in</a>
                                 <a href="signup.jsp" id="customer_register_link">SIGN UP & SAVE 10%</a>
-                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
+                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart (${numProducts})</b><span class="cart-items"></span></a>
                                 </c:when>
 
                             <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin!=true }">
                                 <a href="login" id="customer_login_link">Log out</a>
                                 <a href="homePageController" id="customer_register_link">Hello: ${sessionScope.acc.user}</a>
-                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart</b><span class="cart-items"></span></a>
+                                <a class="header_cart" href="showCartController" id="customer_cart_link"><b>Cart (${numProducts})</b><span class="cart-items"></span></a>
                                 </c:when>
 
                             <c:when test="${sessionScope.acc!=null && sessionScope.acc.isAdmin==true }">
@@ -216,58 +216,20 @@
                 </c:choose>
             </div>
 
-            <div class="row">
-                <c:choose>
-                    <c:when test="${issearch==true}">
-                        <c:if test="${totalpage!=null}">
-                            <div id="pagination">
-                                <span class="prev"><a title="" href="searchProductController?q=${textsearch}&page=${pageCurrent-1>0?pageCurrent-1:"1"}">«
-                                        Previous</a></span>
-                                        <c:if test="${pageCurrent-1>0}">
-                                    <span class=""><a title="" href="searchProductController?q=${textsearch}&page=${pageCurrent-1}">${pageCurrent-1}</a></span>
-                                    </c:if>      
-
-                                <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg">
-                                    <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="searchProductController?q=${textsearch}&page=${pg}">${pg}</a></span>
-                                    </c:forEach>
-                                <span class="next"><a title="" href="searchProductController?q=${textsearch}&page=${pageCurrent+1>totalpage?totalpage:pageCurrent+1}">Next »</a></span>
-                            </div>
+            <div class="row">      
+                <div id="pagination">
+                    <span class="prev"><a title="" href="shopController?page=${pageCurrent-1>0?pageCurrent-1:"1"}">« Previous</a>
+                    </span>
+                    <c:if test="${pageCurrent-1>0}">
+                        <span class=""><a title="" href="shopController?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
                         </c:if>
-                    </c:when>
 
-                    <c:when test="${iscategory==true }">
-                        <div id="pagination">
+                    <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg"> 
+                        <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="shopController?page=${pg}">${pg}</a></span>
+                        </c:forEach>
 
-                            <span class="prev"><a title="" href="categoryController?cid=${cid}&page=${pageCurrent-1>0?pageCurrent-1:"1"}">«
-                                    Previous</a></span>
-                                    <c:if test="${pageCurrent-1>0}">
-                                <span class=""><a title="" href="categoryController?cid=${cid}&page=${pageCurrent-1}">${pageCurrent-1}</a></span>
-                                </c:if>        
-                                <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg">
-                                <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="categoryController?cid=${cid}&page=${pg}">${pg}</a></span>
-                                </c:forEach>
-
-                            <span class="next"><a title="" href="categoryController?cid=${cid}&page=${pageCurrent+1>totalpage?totalpage:pageCurrent+1}">Next
-                                    »</a></span>
-                        </div>
-                    </c:when>
-
-                    <c:otherwise>
-                        <div id="pagination">
-                            <span class="prev"><a title="" href="shopController?page=${pageCurrent-1>0?pageCurrent-1:"1"}">« Previous</a>
-                            </span>
-                            <c:if test="${pageCurrent-1>0}">
-                                <span class=""><a title="" href="shopController?page=${pageCurrent-1}">${pageCurrent-1}</a></span>
-                                </c:if>
-
-                            <c:forEach begin="${pageCurrent}" end="${pageCurrent+2<=totalpage?pageCurrent+2:totalpage}" var="pg"> 
-                                <span class=" ${pg==pageCurrent?"current":""}"><a title="" href="shopController?page=${pg}">${pg}</a></span>
-                                </c:forEach>
-
-                            <span class="next"><a title="" href="shopController?page=${pageCurrent+4>totalpage?totalpage:pageCurrent+4}">Next »</a></span>
-                        </div>
-                    </c:otherwise>
-                </c:choose>
+                    <span class="next"><a title="" href="shopController?page=${pageCurrent+4>totalpage?totalpage:pageCurrent+4}">Next »</a></span>
+                </div>
             </div>
         </div>
     </div>

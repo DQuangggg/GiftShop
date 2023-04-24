@@ -87,9 +87,11 @@ public class managerContactDetails extends HttpServlet {
         String status = request.getParameter("status");
         int sta = Integer.parseInt(status);
         String contactDate = request.getParameter("contactDate");
+        
         Contact con = new Contact();
         con.setContactid(cid);
         con.setStatus(sta);
+        
         DAOContact dao = new DAOContact();
         dao.updateContact(con);
         response.sendRedirect("managerContact");

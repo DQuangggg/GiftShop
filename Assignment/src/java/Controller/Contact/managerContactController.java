@@ -64,6 +64,7 @@ public class managerContactController extends HttpServlet {
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
+        
         DAOContact co = new DAOContact();
         
         int count = co.getTotalContact();

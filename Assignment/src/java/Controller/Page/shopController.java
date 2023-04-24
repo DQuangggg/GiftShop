@@ -7,6 +7,7 @@ package Controller.Page;
 
 import DAO.DAOCategory;
 import DAO.DAOProduct;
+import Entity.Cart;
 import Entity.Category;
 import Entity.Product;
 import java.io.IOException;
@@ -15,7 +16,9 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -64,6 +67,19 @@ public class shopController extends HttpServlet {
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
         listCategory =  cd.getCategory();
+        
+        //count product in cart
+        HttpSession session = request.getSession();
+        if (session.getAttribute("listcart") != null) {
+            ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listcart");
+            int numProducts = 0;
+            for (Cart cart : listCart) {
+                numProducts += cart.getAmount();
+            }
+            request.setAttribute("numProducts", numProducts);
+        } else {
+            request.setAttribute("numProducts", 0);
+        }
         
         int totalPage = 0;
         int pagesize = 20;
