@@ -14,7 +14,11 @@
         <link href="css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/stylepage.css" />
         <link rel="stylesheet" href="css/dropdownstyle.css" />
-
+        <link href="css/bootstrap.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/stylepage.css" />
+        <link rel="stylesheet" href="css/dropdownstyle.css" />
+        <link rel="stylesheet" href="css/bestSellerStyle.css" />
+        <link rel="stylesheet" href="css/checkoutStyle.css" />
         <link rel="stylesheet" href="css/managerStyle.css" />
     </head>
     <body>
@@ -95,162 +99,200 @@
         </div>
 
         <div class="container">
-            <div class="managet_contact">
+            <div class="row  ">
+                <div class="column_center">
+                    <div id="main_content" >
+                        <div class="col-sm-6">
+                            <form action="cartDetails" method="post" onsubmit="updateMessage()">
+                                <div style="color: #db1d24; text-align: left; margin-bottom: 10px; font-size: 30px">ORDER INFORMATION</div>
 
-                <form action="cartDetails" method="post" onsubmit="updateMessage()">
-                    <div style="color: #db1d24; text-align: left; margin-bottom: 10px; font-size: 30px">ORDER INFORMATION</div>
-
-                    <label>Order ID : </label>
-                    <input style =" border-top-style: hidden; border-right-style: hidden;
-                           border-left-style: hidden;
-                           border-bottom-style: hidden; font-size: 20px" 
-                           type="text" value="${cart.cartid}" name="orderid"  readonly />
-                    <br/>
-
-                    <label>Customer ID : </label>
-                    <c:forEach items="${listO}" var="o"> 
-                        <c:if test="${cart.cartid == o.orderid}"> 
-                            <input style =" border-top-style: hidden; border-right-style: hidden;
-                                   border-left-style: hidden;
-                                   border-bottom-style: hidden; font-size: 20px" 
-                                   type="text" value="${o.custid}" name="custid"  readonly />
-                        </c:if>
-                    </c:forEach>
-                    <br/>
-
-                    <label>Customer Name : </label>
-                    <c:forEach items="${listO}" var="o">
-                        <c:forEach items="${listCU}" var="c">
-                            <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                <label style="font-size: 25px;">Order ID : </label>
                                 <input style =" border-top-style: hidden; border-right-style: hidden;
                                        border-left-style: hidden;
                                        border-bottom-style: hidden; font-size: 20px" 
-                                       type="text" value="${c.firstname} ${c.lastname}" name="name"  readonly />
-                            </c:if>
-                        </c:forEach>
-                    </c:forEach>
-                    <br/>
+                                       type="text" value="${cart.cartid}" name="orderid"  readonly />
+                                <br/>
 
-                    <label>Address : </label>
-                    <c:forEach items="${listO}" var="o">
-                        <c:forEach items="${listCU}" var="c">
-                            <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
-                                <input style =" border-top-style: hidden; border-right-style: hidden;
-                                       border-left-style: hidden;
-                                       border-bottom-style: hidden; font-size: 20px" 
-                                       type="text" value="${c.address}" name="address"  readonly />
-                            </c:if>
-                        </c:forEach>
-                    </c:forEach>
-                    <br/>
+                                <label style="font-size: 25px;">Customer ID : </label>
+                                <c:forEach items="${listO}" var="o"> 
+                                    <c:if test="${cart.cartid == o.orderid}"> 
+                                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                                               border-left-style: hidden;
+                                               border-bottom-style: hidden; font-size: 20px" 
+                                               type="text" value="${o.custid}" name="custid"  readonly />
+                                    </c:if>
+                                </c:forEach>
+                                <br/>
 
-                    <label>City : </label>
-                    <c:forEach items="${listO}" var="o">
-                        <c:forEach items="${listCU}" var="c">
-                            <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
-                                <input style =" border-top-style: hidden; border-right-style: hidden;
-                                       border-left-style: hidden;
-                                       border-bottom-style: hidden; font-size: 20px" 
-                                       type="text" value="${c.city}" name="city"  readonly />
-                            </c:if>
-                        </c:forEach>
-                    </c:forEach>
-                    <br/>
+                                <label style="font-size: 25px;">Customer Name : </label>
+                                <c:forEach items="${listO}" var="o">
+                                    <c:forEach items="${listCU}" var="c">
+                                        <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                            <input style =" border-top-style: hidden; border-right-style: hidden;
+                                                   border-left-style: hidden;
+                                                   border-bottom-style: hidden; font-size: 20px" 
+                                                   type="text" value="${c.firstname} ${c.lastname}" name="name"  readonly />
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                                <br/>
 
+                                <label style="font-size: 25px;">Address : </label>
+                                <c:forEach items="${listO}" var="o">
+                                    <c:forEach items="${listCU}" var="c">
+                                        <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                            <input style =" border-top-style: hidden; border-right-style: hidden;
+                                                   border-left-style: hidden;
+                                                   border-bottom-style: hidden; font-size: 20px" 
+                                                   type="text" value="${c.address}" name="address"  readonly />
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                                <br/>
 
-                    <label>Phone : </label>
-                    <c:forEach items="${listO}" var="o">
-                        <c:forEach items="${listCU}" var="c">
-                            <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
-                                <input style =" border-top-style: hidden; border-right-style: hidden;
-                                       border-left-style: hidden;
-                                       border-bottom-style: hidden; font-size: 20px" 
-                                       type="text" value="${c.phone}" name="phone"  readonly />
-                            </c:if>
-                        </c:forEach>
-                    </c:forEach>
-                    <br/>    
-
-                    <label>Order Date : </label>
-                    <c:forEach items="${listO}" var="o"> 
-                        <c:if test="${cart.cartid == o.orderid}"> 
-                            <input style =" border-top-style: hidden; border-right-style: hidden;
-                                   border-left-style: hidden;
-                                   border-bottom-style: hidden; font-size: 20px" 
-                                   type="text" value="${o.orderDate}" name="orderdate"  readonly /></c:if>
-                    </c:forEach>
-                    <br/> 
+                                <label style="font-size: 25px;">City : </label>
+                                <c:forEach items="${listO}" var="o">
+                                    <c:forEach items="${listCU}" var="c">
+                                        <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                            <input style =" border-top-style: hidden; border-right-style: hidden;
+                                                   border-left-style: hidden;
+                                                   border-bottom-style: hidden; font-size: 20px" 
+                                                   type="text" value="${c.city}" name="city"  readonly />
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                                <br/>
 
 
-                    <label>Status : </label>
-                    <c:forEach items="${listO}" var="o"> 
-                        <c:if test="${cart.cartid == o.orderid }">  
-                            <label style="font-size: 20px;">
-                                <input  type="radio" name="status"  value="2" ${o.status == 2 ? "checked" : "" }> Done
-                                <input type="radio" name="status"  value="1" ${o.status == 1 ? "checked" : "" }> Process
-                                <input type="radio" name="status"  value="0" ${o.status == 0 ? "checked" : "" }> Wait 
-                            </label>
+                                <label style="font-size: 25px;">Phone : </label>
+                                <c:forEach items="${listO}" var="o">
+                                    <c:forEach items="${listCU}" var="c">
+                                        <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                            <input style =" border-top-style: hidden; border-right-style: hidden;
+                                                   border-left-style: hidden;
+                                                   border-bottom-style: hidden; font-size: 20px" 
+                                                   type="text" value="${c.phone}" name="phone"  readonly />
+                                        </c:if>
+                                    </c:forEach>
+                                </c:forEach>
+                                <br/>    
 
-                        </c:if>
-                    </c:forEach>
-                    <br/> 
+                                <label style="font-size: 25px;">Order Date : </label>
+                                <c:forEach items="${listO}" var="o"> 
+                                    <c:if test="${cart.cartid == o.orderid}"> 
+                                        <input style =" border-top-style: hidden; border-right-style: hidden;
+                                               border-left-style: hidden;
+                                               border-bottom-style: hidden; font-size: 20px" 
+                                               type="text" value="${o.orderDate}" name="orderdate"  readonly /></c:if>
+                                </c:forEach>
+                                <br/> 
 
-                    <button >Save</button>
-                </form>
 
-            </div>                                                         
-        </div>
-        <div class="container-fluid ">
-            <div class="row">
-            </div>
-            <div class="row_footer1">
-                <div class="col-md-3  custom_footer custom_footer1">
-                    <h3>Menu</h3>
-                    <ul class="list">
+                                <label style="font-size: 25px;">Status : </label>
+                                <c:forEach items="${listO}" var="o"> 
+                                    <c:if test="${cart.cartid == o.orderid }">  
+                                        <label style="font-size: 20px;">
+                                            <input  type="radio" name="status"  value="2" ${o.status == 2 ? "checked" : "" }> Done
+                                            <input type="radio" name="status"  value="1" ${o.status == 1 ? "checked" : "" }> Process
+                                            <input type="radio" name="status"  value="0" ${o.status == 0 ? "checked" : "" }> Wait 
+                                        </label>
 
-                        <li class="firstItem"><a title="" href="homePageController">Home</a></li>
+                                    </c:if>
+                                </c:forEach>
+                                <br/> 
+                                <button >Save</button>
+                            </form>
+                        </div>
+                    </div>
 
-                        <li><a title="" href="shopController">Shop</a></li>
+                    <div class="column_right column col-sm-6">
+                        <div class="widget widget__best-sellers">
+                            <h3 class="widget_header">Product</h3>
+                            <div class="widget_content">
+                                <div class="product-listing product-listing__bestsellers">
+                                    <c:forEach items= "${listCa}" var="ca">
+                                        
+                                            <div class="product firstItem col-lg-12" >
+                                                <div class="product_img">
+                                                    <a href="productController?pid=${ca.product.pid}">
+                                                        <img src="${ca.product.productImg}">
+                                                    </a>
+                                                </div>
+                                                <div class="product_info">
+                                                    <div class="product_name">${ca.product.productName}</div>
+                                                    <div class="product_pricecheckout">Quantity: ${ca.amount}
+                                                    </div>
+                                                </div>
+                                                <div class="product_pricecheckout">Price: ${ca.product.productPrice}$</div>
+                                            </div>
+                                       
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
 
-                        <li><a title="" href="aboutusController">About Us</a></li>
-
-                        <li class="lastItem"><a title="" href="contactusController">Contact us</a></li>
-
-                    </ul>
-                </div>
-                <div class="col-md-3  custom_footer custom_footer2">
-                    <h3>Collections</h3>
-                    <ul class="list">
-                        <c:forEach items="${listC}" var="c" >
-                            <li> <a title="" href="categoryController?cid=${c.cid}">${c.categoryName}</a></li>
-                            </c:forEach>
-                    </ul>
-                </div>
-
-                <div class="col-md-3  custom_footer custom_footer3">
-                    <h3>Information</h3>
-                    <ul class="list">
-                        <li class="lastItem"><a title="" href="showCartController">My cart</a></li>
-                            <c:if test="${sessionScope.acc!=null}">
-                            <li class=""><a title="" href="changePassword">Change Password</a></li>
-                            </c:if>
-                    </ul>
-                </div>
-
-                <div class="col-md-3  custom_footer custom_footer4">
-                    <h3>Contacts</h3>
-                    <ul>
-                        <li class="firstItem">0210 Ram Road,  Royal Crescent Tel 136-567-9842
-                        </li>
-                        <li class="lastItem">Email: <a href="https://mail.google.com/">shopGift@gmail.com</a></li>
-                    </ul>
+                    </div>
                 </div>
             </div>
+
         </div>
-        <script>
-            function updateMessage() {
-                alert("Update order successful!");
-            }
-        </script>
-    </body>
+    </div>
+
+
+
+</div>                                                         
+</div>
+<div class="container-fluid ">
+    <div class="row">
+    </div>
+    <div class="row_footer1">
+        <div class="col-md-3  custom_footer custom_footer1">
+            <h3>Menu</h3>
+            <ul class="list">
+
+                <li class="firstItem"><a title="" href="homePageController">Home</a></li>
+
+                <li><a title="" href="shopController">Shop</a></li>
+
+                <li><a title="" href="aboutusController">About Us</a></li>
+
+                <li class="lastItem"><a title="" href="contactusController">Contact us</a></li>
+
+            </ul>
+        </div>
+        <div class="col-md-3  custom_footer custom_footer2">
+            <h3>Collections</h3>
+            <ul class="list">
+                <c:forEach items="${listC}" var="c" >
+                    <li> <a title="" href="categoryController?cid=${c.cid}">${c.categoryName}</a></li>
+                    </c:forEach>
+            </ul>
+        </div>
+
+        <div class="col-md-3  custom_footer custom_footer3">
+            <h3>Information</h3>
+            <ul class="list">
+                <li class="lastItem"><a title="" href="showCartController">My cart</a></li>
+                    <c:if test="${sessionScope.acc!=null}">
+                    <li class=""><a title="" href="changePassword">Change Password</a></li>
+                    </c:if>
+            </ul>
+        </div>
+
+        <div class="col-md-3  custom_footer custom_footer4">
+            <h3>Contacts</h3>
+            <ul>
+                <li class="firstItem">0210 Ram Road,  Royal Crescent Tel 136-567-9842
+                </li>
+                <li class="lastItem">Email: <a href="https://mail.google.com/">shopGift@gmail.com</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    function updateMessage() {
+        alert("Update order successful!");
+    }
+</script>
+</body>
 </html>

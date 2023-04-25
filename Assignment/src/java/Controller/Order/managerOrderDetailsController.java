@@ -71,6 +71,9 @@ public class managerOrderDetailsController extends HttpServlet {
         DAOCart cd = new DAOCart();
         Cart c = new Cart();
         c = cd.getCartById(cartidString);
+        
+        ArrayList<Cart> listCart = new ArrayList<>();
+        listCart = cd.getCartByIds(cartidString);
 
         ArrayList<Product> listProduct = new ArrayList<>();
         DAOProduct dp = new DAOProduct();
@@ -92,6 +95,7 @@ public class managerOrderDetailsController extends HttpServlet {
         request.setAttribute("listC", listCategory);
         request.setAttribute("listO", listOrder);
         request.setAttribute("listCU", listCustomer);
+        request.setAttribute("listCa", listCart);
         request.setAttribute("cart", c);
         request.getRequestDispatcher("managerOrderDetails.jsp").forward(request, response);
     }

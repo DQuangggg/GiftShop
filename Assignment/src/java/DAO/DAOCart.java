@@ -11,6 +11,7 @@ import Entity.Product;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,6 +21,31 @@ import java.util.logging.Logger;
  */
 public class DAOCart extends DBConnect {
 
+     public ArrayList<Cart> getCarts() {
+        ArrayList<Cart> carts = new ArrayList<>();
+        try {
+            String sqlquery = "SELECT * FROM [Cart]";
+
+            PreparedStatement statement = connection.prepareStatement(sqlquery);
+            ResultSet rs = statement.executeQuery();
+
+            while (rs.next()) {
+                Cart c = new Cart();
+                c.setCartid(rs.getInt("orderid"));
+                c.setAmount(rs.getInt("amount"));
+                Product p = new Product();
+                p.setProductName(rs.getString("productName"));
+                p.setProductImg(rs.getString("productImg"));
+                p.setProductPrice(rs.getInt("productPrice"));
+                c.setProduct(p);
+                carts.add(c);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DAOProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return carts;
+    }
+    
     public int getIdOfLastCart() {
         int lastCartId = 0;
         try {
@@ -57,7 +83,7 @@ public class DAOCart extends DBConnect {
 
     public Cart getCartById(String id) {
         try {
-            String sql = "SELECT c.orderid , p.productname , p.productimg , p.productprice , c.amount , o.orderdate \n"
+            String sql = "SELECT c.orderid ,p.pid, p.productname , p.productimg , p.productprice , c.amount , o.orderdate \n"
                     + "       FROM [Cart] c inner join Product p on c.pid = p.pid\n"
                     + "                     inner join [Order] o on c.orderid = o.orderid\n"
                     + "       WHERE c.orderid = ?";
@@ -69,9 +95,10 @@ public class DAOCart extends DBConnect {
                 c.setCartid(rs.getInt("orderid"));
                 c.setAmount(rs.getInt("amount"));
                 Product p = new Product();
-                p.setProductName(rs.getString("productname"));
-                p.setProductImg(rs.getString("productimg"));
-                p.setProductPrice(rs.getInt("productprice"));
+                p.setPid(rs.getInt("pid"));
+                p.setProductName(rs.getString("productName"));
+                p.setProductImg(rs.getString("productImg"));
+                p.setProductPrice(rs.getInt("productPrice"));
                 c.setProduct(p);
                 Order o = new Order();
                 o.setOrderDate(rs.getDate("orderdate"));
@@ -82,9 +109,39 @@ public class DAOCart extends DBConnect {
         }
         return null;
     }
+    
+    public ArrayList<Cart> getCartByIds(String id) {
+         ArrayList<Cart> carts = new ArrayList<>();
+        try {
+            String sql = "SELECT c.orderid ,p.pid, p.productname , p.productimg , p.productprice , c.amount , o.orderdate \n"
+                    + "       FROM [Cart] c inner join Product p on c.pid = p.pid\n"
+                    + "                     inner join [Order] o on c.orderid = o.orderid\n"
+                    + "       WHERE c.orderid = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, id);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                Cart c = new Cart();
+                c.setCartid(rs.getInt("orderid"));
+                c.setAmount(rs.getInt("amount"));
+                Product p = new Product();
+                p.setPid(rs.getInt("pid"));
+                p.setProductName(rs.getString("productName"));
+                p.setProductImg(rs.getString("productImg"));
+                p.setProductPrice(rs.getInt("productPrice"));
+                c.setProduct(p);
+                Order o = new Order();
+                o.setOrderDate(rs.getDate("orderdate"));
+                carts.add(c);
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(DAOCart.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return carts;
+    }
 
     public static void main(String[] args) {
         DAOCart c = new DAOCart();
-        System.out.println(c.getCartById("16"));
+        System.out.println(c.getCartByIds("16"));
     }
 }
