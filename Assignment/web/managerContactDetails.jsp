@@ -150,8 +150,10 @@
                         <br/>
 
                         <label>Category: </label>
-                        <input type="radio" name="status"  value="1" ${c.status == 1 ? "checked" : "" }> Readed
-                        <input type="radio" name="status"  value="0" ${c.status == 0 ? "checked" : "" }> Unread
+                        <label style="font-size: 20px;">
+                            <input type="radio" name="status"  value="1" ${c.status == 1 ? "checked" : "" }> Readed
+                            <input type="radio" name="status"  value="0" ${c.status == 0 ? "checked" : "" }> Unread
+                        </label>
                         <br/>
 
                         <button>Update</button>

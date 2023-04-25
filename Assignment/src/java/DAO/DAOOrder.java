@@ -200,6 +200,7 @@ public class DAOOrder extends DBConnect {
                 o.setOrderid(rs.getInt("orderid"));
                 o.setCustid(rs.getInt("custid"));
                 o.setOrderDate(rs.getDate("orderdate"));
+                o.setStatus(rs.getInt("status"));
                 listOrder.add(o);
 
             }
@@ -239,7 +240,7 @@ public class DAOOrder extends DBConnect {
     public List<Order> pagingOrder(int index) {
         List<Order> list = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM [Order] ORDER BY orderid  OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY";
+            String sql = "SELECT * FROM [Order] ORDER BY orderid DESC OFFSET ? ROWS FETCH NEXT 15 ROWS ONLY";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setInt(1, (index - 1) * 15);
             ResultSet rs = statement.executeQuery();
@@ -248,6 +249,7 @@ public class DAOOrder extends DBConnect {
                 o.setOrderid(rs.getInt("orderid"));
                 o.setCustid(rs.getInt("custid"));
                 o.setOrderDate(rs.getDate("orderdate"));
+                o.setStatus(rs.getInt("status"));
                 list.add(o);
             }
         } catch (Exception e) {

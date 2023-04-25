@@ -101,98 +101,101 @@
                     <div style="color: #db1d24; text-align: left; margin-bottom: 10px; font-size: 30px">ORDER INFORMATION</div>
 
                     <label>Order ID : </label>
-                        <input style =" border-top-style: hidden; border-right-style: hidden;
-                               border-left-style: hidden;
-                               border-bottom-style: hidden; font-size: 20px" 
-                               type="text" value="${cart.cartid}" name="orderid"  readonly />
-                        <br/>
+                    <input style =" border-top-style: hidden; border-right-style: hidden;
+                           border-left-style: hidden;
+                           border-bottom-style: hidden; font-size: 20px" 
+                           type="text" value="${cart.cartid}" name="orderid"  readonly />
+                    <br/>
 
                     <label>Customer ID : </label>
-                        <c:forEach items="${listO}" var="o"> 
-                            <c:if test="${cart.cartid == o.orderid}"> 
-                                <input style =" border-top-style: hidden; border-right-style: hidden;
-                               border-left-style: hidden;
-                               border-bottom-style: hidden; font-size: 20px" 
-                               type="text" value="${o.custid}" name="custid"  readonly />
-                            </c:if>
-                        </c:forEach>
-                        <br/>
+                    <c:forEach items="${listO}" var="o"> 
+                        <c:if test="${cart.cartid == o.orderid}"> 
+                            <input style =" border-top-style: hidden; border-right-style: hidden;
+                                   border-left-style: hidden;
+                                   border-bottom-style: hidden; font-size: 20px" 
+                                   type="text" value="${o.custid}" name="custid"  readonly />
+                        </c:if>
+                    </c:forEach>
+                    <br/>
 
                     <label>Customer Name : </label>
-                        <c:forEach items="${listO}" var="o">
-                            <c:forEach items="${listCU}" var="c">
-                                <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
-                                    <input style =" border-top-style: hidden; border-right-style: hidden;
-                               border-left-style: hidden;
-                               border-bottom-style: hidden; font-size: 20px" 
-                               type="text" value="${c.firstname} ${c.lastname}" name="name"  readonly />
-                                </c:if>
-                            </c:forEach>
+                    <c:forEach items="${listO}" var="o">
+                        <c:forEach items="${listCU}" var="c">
+                            <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                <input style =" border-top-style: hidden; border-right-style: hidden;
+                                       border-left-style: hidden;
+                                       border-bottom-style: hidden; font-size: 20px" 
+                                       type="text" value="${c.firstname} ${c.lastname}" name="name"  readonly />
+                            </c:if>
                         </c:forEach>
-                        <br/>
+                    </c:forEach>
+                    <br/>
 
                     <label>Address : </label>
-                        <c:forEach items="${listO}" var="o">
-                            <c:forEach items="${listCU}" var="c">
-                                <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
-                                    <input style =" border-top-style: hidden; border-right-style: hidden;
-                               border-left-style: hidden;
-                               border-bottom-style: hidden; font-size: 20px" 
-                               type="text" value="${c.address}" name="address"  readonly />
-                                </c:if>
-                            </c:forEach>
+                    <c:forEach items="${listO}" var="o">
+                        <c:forEach items="${listCU}" var="c">
+                            <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                <input style =" border-top-style: hidden; border-right-style: hidden;
+                                       border-left-style: hidden;
+                                       border-bottom-style: hidden; font-size: 20px" 
+                                       type="text" value="${c.address}" name="address"  readonly />
+                            </c:if>
                         </c:forEach>
-                        <br/>
+                    </c:forEach>
+                    <br/>
 
                     <label>City : </label>
-                        <c:forEach items="${listO}" var="o">
-                            <c:forEach items="${listCU}" var="c">
-                                <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
-                                    <input style =" border-top-style: hidden; border-right-style: hidden;
-                               border-left-style: hidden;
-                               border-bottom-style: hidden; font-size: 20px" 
-                               type="text" value="${c.city}" name="city"  readonly />
-                                </c:if>
-                            </c:forEach>
+                    <c:forEach items="${listO}" var="o">
+                        <c:forEach items="${listCU}" var="c">
+                            <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
+                                <input style =" border-top-style: hidden; border-right-style: hidden;
+                                       border-left-style: hidden;
+                                       border-bottom-style: hidden; font-size: 20px" 
+                                       type="text" value="${c.city}" name="city"  readonly />
+                            </c:if>
                         </c:forEach>
-                        <br/>
+                    </c:forEach>
+                    <br/>
 
 
                     <label>Phone : </label>
-                        <c:forEach items="${listO}" var="o">
-                            <c:forEach items="${listCU}" var="c">
-                                <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
-                                    <input style =" border-top-style: hidden; border-right-style: hidden;
-                               border-left-style: hidden;
-                               border-bottom-style: hidden; font-size: 20px" 
-                               type="text" value="${c.phone}" name="phone"  readonly />
-                                </c:if>
-                            </c:forEach>
-                        </c:forEach>
-                        <br/>    
-
-                    <label>Order Date : </label>
-                        <c:forEach items="${listO}" var="o"> 
-                            <c:if test="${cart.cartid == o.orderid}"> 
+                    <c:forEach items="${listO}" var="o">
+                        <c:forEach items="${listCU}" var="c">
+                            <c:if test="${o.custid == c.custid && cart.cartid == o.orderid}">
                                 <input style =" border-top-style: hidden; border-right-style: hidden;
-                               border-left-style: hidden;
-                               border-bottom-style: hidden; font-size: 20px" 
-                               type="text" value="${o.orderDate}" name="orderdate"  readonly /></c:if>
-                        </c:forEach>
-                        <br/> 
-  
-                        
-                    <label>Status : </label>
-                        <c:forEach items="${listO}" var="o"> 
-                            <c:if test="${cart.cartid == o.orderid }">                         
-                                <input type="radio" name="status"  value="2" ${o.status == 2 ? "checked" : "" }> Done
-                                <input type="radio" name="status"  value="1" ${o.status == 1 ? "checked" : "" }> Process
-                                <input type="radio" name="status"  value="0" ${o.status == 0 ? "checked" : "" }> Wait 
+                                       border-left-style: hidden;
+                                       border-bottom-style: hidden; font-size: 20px" 
+                                       type="text" value="${c.phone}" name="phone"  readonly />
                             </c:if>
                         </c:forEach>
-                        <br/> 
+                    </c:forEach>
+                    <br/>    
 
-                        <button >Save</button>
+                    <label>Order Date : </label>
+                    <c:forEach items="${listO}" var="o"> 
+                        <c:if test="${cart.cartid == o.orderid}"> 
+                            <input style =" border-top-style: hidden; border-right-style: hidden;
+                                   border-left-style: hidden;
+                                   border-bottom-style: hidden; font-size: 20px" 
+                                   type="text" value="${o.orderDate}" name="orderdate"  readonly /></c:if>
+                    </c:forEach>
+                    <br/> 
+
+
+                    <label>Status : </label>
+                    <c:forEach items="${listO}" var="o"> 
+                        <c:if test="${cart.cartid == o.orderid }">  
+                            <label style="font-size: 20px;">
+                                <input  type="radio" name="status"  value="2" ${o.status == 2 ? "checked" : "" }> Done
+                                <input type="radio" name="status"  value="1" ${o.status == 1 ? "checked" : "" }> Process
+                                <input type="radio" name="status"  value="0" ${o.status == 0 ? "checked" : "" }> Wait 
+                            </label>
+
+                        </c:if>
+                    </c:forEach>
+                    <br/> 
+
+                    <button >Save</button>
                 </form>
 
             </div>                                                         

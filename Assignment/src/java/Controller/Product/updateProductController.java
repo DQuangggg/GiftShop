@@ -63,9 +63,11 @@ public class updateProductController extends HttpServlet {
         DAOProduct pd = new DAOProduct();
         Product p = new Product();
         p = pd.getProductById(pid);
+        
         ArrayList<Category> listCategory = new ArrayList<>();
         DAOCategory cd = new DAOCategory();
         listCategory = cd.getCategory();
+        
         request.setAttribute("listC", listCategory);
         request.setAttribute("product", p);
         request.getRequestDispatcher("updateProduct.jsp").forward(request, response);
