@@ -64,18 +64,6 @@ public class searchProductController extends HttpServlet {
         String nameSearch = request.getParameter("q");
         DAOProduct pd = new DAOProduct();
 
-//        int totalPage = 0;
-//        int pagesize = 12;
-//        String pageCurrent = request.getParameter("page");
-//        int pageC = 0;
-//        if (pageCurrent == null) {
-//            pageC = 1;
-//        } else {
-//            pageC = Integer.parseInt(pageCurrent);
-//        }
-//        totalPage = pd.getTotalPageSreachByName(nameSearch, pagesize);
-//        ArrayList<Product> products = new ArrayList<>();
-//        products = pd.getProductSearchByNameWithPaging(nameSearch, pageC, pagesize);
         int count = pd.getTotalProductBySearch(nameSearch);
         String indexPage = request.getParameter("index");
         if (indexPage == null) {
@@ -102,8 +90,6 @@ public class searchProductController extends HttpServlet {
             request.setAttribute("textsearch", nameSearch);
             request.setAttribute("tag", index);
             request.setAttribute("endP", endPage);
-//            request.setAttribute("totalpage", totalPage);
-//            request.setAttribute("pageCurrent", pageC);
 
             request.getRequestDispatcher("shop.jsp").forward(request, response);
         } else {
@@ -117,6 +103,7 @@ public class searchProductController extends HttpServlet {
             request.setAttribute("textsearch", "Don't find any product have name contain " + nameSearch);
             request.getRequestDispatcher("shop.jsp").forward(request, response);
         }
+
     }
 
     /**
@@ -132,32 +119,47 @@ public class searchProductController extends HttpServlet {
             throws ServletException, IOException {
         String nameSearch = request.getParameter("q");
         DAOProduct pd = new DAOProduct();
-        int totalPage = 0;
-        int pagesize = 12;
-        String pageCurrent = request.getParameter("page");
-        int pageC = 0;
-        if (pageCurrent == null) {
-            pageC = 1;
-        } else {
-            pageC = Integer.parseInt(pageCurrent);
 
+        int count = pd.getTotalProductBySearch(nameSearch);
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "1";
         }
-        totalPage = pd.getTotalPageSreachByName(nameSearch, pagesize);
-        ArrayList<Product> products = new ArrayList<>();
-        products = pd.getProductSearchByNameWithPaging(nameSearch, pageC, pagesize);
-        boolean issearch = true;
-        ArrayList<Category> listCategory = new ArrayList<>();
-        DAOCategory cd = new DAOCategory();
-        listCategory = cd.getCategory();
-        request.setAttribute("listC", listCategory);
-        request.setAttribute("listP", products);
+        int index = Integer.parseInt(indexPage);
 
-        request.setAttribute("issearch", issearch);
-        request.setAttribute("textsearch", nameSearch);
-        request.setAttribute("totalpage", totalPage);
-        request.setAttribute("pageCurrent", pageC);
+        int endPage = count / 15;
+        if (count % 15 != 0) {
+            endPage++;
+        }
+        List<Product> products = new ArrayList<>();
+        products = pd.pagingProdctBySearch(nameSearch, index);
 
-        request.getRequestDispatcher("shop.jsp").forward(request, response);
+        if (products.isEmpty() == false) {
+            boolean issearch = true;
+            ArrayList<Category> listCategory = new ArrayList<>();
+            DAOCategory cd = new DAOCategory();
+            listCategory = cd.getCategory();
+            request.setAttribute("listC", listCategory);
+            request.setAttribute("listP", products);
+
+            request.setAttribute("issearch", issearch);
+            request.setAttribute("textsearch", nameSearch);
+            request.setAttribute("tag", index);
+            request.setAttribute("endP", endPage);
+
+            request.getRequestDispatcher("shop.jsp").forward(request, response);
+        } else {
+            ArrayList<Category> listCategory = new ArrayList<>();
+            DAOCategory cd = new DAOCategory();
+            listCategory = cd.getCategory();
+            boolean issearch = true;
+            request.setAttribute("issearch", issearch);
+
+            request.setAttribute("listC", listCategory);
+            request.setAttribute("textsearch", "Don't find any product have name contain " + nameSearch);
+            request.getRequestDispatcher("shop.jsp").forward(request, response);
+        }
+
     }
 
     /**

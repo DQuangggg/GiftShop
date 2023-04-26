@@ -101,7 +101,7 @@
 
                         <form action="managerController" method="post">
                             <div class="">
-                                <input id="search-byid" name="pid" type="search" placeholder="Search product by id..." value="${searchMessage}" pattern="[0-9]{0,}" title="Please input number only."/>
+                                <input id="search-byid" name="pid" type="search" placeholder="Search product by name..." value="${searchMessage}"/>
                                 <button type="submit" class="button_searchbyid">
                                     Search
                                 </button>

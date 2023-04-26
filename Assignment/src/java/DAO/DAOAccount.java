@@ -300,10 +300,10 @@ public class DAOAccount extends DBConnect {
 
     public static void main(String[] args) {
         DAOAccount dao = new DAOAccount();
-        //System.out.println(dao.getTotalAccount());
-        List<Account> list = dao.pagingCAccount(1);
-        for (Account product : list) {
-            System.out.println(product);
-        }
+        System.out.println(dao.getAccountsByName("quang"));
+//        List<Account> list = dao.pagingCAccount(1);
+//        for (Account product : list) {
+//            System.out.println(product);
+//        }
     }
 }

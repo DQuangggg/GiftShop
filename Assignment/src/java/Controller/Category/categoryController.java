@@ -6,6 +6,7 @@ package Controller.Category;
 
 import DAO.DAOCategory;
 import DAO.DAOProduct;
+import Entity.Cart;
 import Entity.Category;
 import Entity.Product;
 import java.io.IOException;
@@ -14,6 +15,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,11 +80,23 @@ public class categoryController extends HttpServlet {
         }
         int index = Integer.parseInt(indexPage);
 
-        int endPage = count / 15;
-        if (count % 15 != 0) {
+        int endPage = count / 16;
+        if (count % 16 != 0) {
             endPage++;
         }
-        
+
+        HttpSession session = request.getSession();
+        if (session.getAttribute("listcart") != null) {
+            ArrayList<Cart> listCart = (ArrayList<Cart>) session.getAttribute("listcart");
+            int numProducts = 0;
+            for (Cart cart : listCart) {
+                numProducts += cart.getAmount();
+            }
+            request.setAttribute("numProducts", numProducts);
+        } else {
+            request.setAttribute("numProducts", 0);
+        }
+
         List<Product> products = new ArrayList<>();
         products = pd.pagingProdctByCategory(cid, index);
 

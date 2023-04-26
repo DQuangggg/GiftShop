@@ -104,18 +104,19 @@ public class managerController extends HttpServlet {
         listCategory = cd.getCategory();
 
         String pidString = request.getParameter("pid");
-        int pid = Integer.parseInt(pidString);
+        //int pid = Integer.parseInt(pidString);
         DAOProduct pd = new DAOProduct();
-        Product p = new Product();
+        ArrayList<Product> listProduct = new ArrayList<>();
+        //Product p = new Product();
         
-        p = pd.getProductById(pid);
+        listProduct = pd.getProductByName(pidString);
         //if found product
-        if (p != null) {
-            ArrayList<Product> products = new ArrayList<>();
-            products.add(p);
+        if (listProduct != null) {
+           Product p = new Product();
+            listProduct.add(p);
             
-            request.setAttribute("searchMessage", pid);
-            request.setAttribute("listP", products);
+            request.setAttribute("searchMessage", pidString);
+            request.setAttribute("listP", listProduct);
             request.setAttribute("listC", listCategory);
             request.getRequestDispatcher("manager.jsp").forward(request, response);
         } else {
