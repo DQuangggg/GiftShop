@@ -227,7 +227,7 @@ public class DAOProduct extends DBConnect {
                     + "[productimg] =?, \n"
                     + "[productprice] = ?, \n"
                     + "[productnote]=?,\n"
-                    + "[cid]= ? \n"
+                    + "[cid]=?\n"
                     + "Where [pid] = ?";
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, p.getProductName());
@@ -582,6 +582,6 @@ public class DAOProduct extends DBConnect {
 //        for (Product product : list) {
 //            System.out.println(product);
 //        }
-        System.out.println(dao.pagingProdctBySearch("Man", 0));
+        System.out.println(dao.getProductById(1));
     }
 }

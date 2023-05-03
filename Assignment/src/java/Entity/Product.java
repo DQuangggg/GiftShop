@@ -19,7 +19,6 @@ public class Product {
     public Product() {
     }
 
-   
     public Product(int pid, String productName, String productImg, int productPrice, String productNote, int cid) {
         this.pid = pid;
         this.productName = productName;
@@ -29,6 +28,7 @@ public class Product {
         this.cid = cid;
     }
 
+   
     
     public int getCid() {
         return cid;
@@ -82,6 +82,7 @@ public class Product {
     public String toString() {
         return "Product{" + "pid=" + pid + ", productName=" + productName + ", productImg=" + productImg + ", productPrice=" + productPrice + ", productNote=" + productNote + ", cid=" + cid + '}';
     }
-    
+
+
     
 }

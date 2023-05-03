@@ -41,6 +41,7 @@
                             <option value="${c.cid}" ${product.cid == c.cid ? "selected":""}>${c.categoryName}</option>
                         </c:forEach>
                     </select><br/>
+                   
                     
                     <button>Update</button>
                     <button type="reset">Reset</button>
